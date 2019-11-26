@@ -1,0 +1,9 @@
+<div class="jumbotron text-center">
+    <input  [(ngModel)]="nameToSearch" class="form-control mr-sm-2" type="search" placeholder="Search a film" aria-label="Search" autofocus>
+    <button (click)="searchFilm(nameToSearch)" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</div>
+<div class="card"> 
+  <div class="row" *ngIf="films.length>0">
+    <app-movie *ngFor="let movie of films" [movie]="movie" class="col-4"></app-movie> 
+  </div>  
+</div>

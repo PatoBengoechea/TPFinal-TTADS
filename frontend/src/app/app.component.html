@@ -1,0 +1,31 @@
+<div class="header">
+  <!--Barra nav-->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <img src="https://pbs.twimg.com/profile_images/504352126412136448/7rLwIVFT_400x400.png" alt="UTN image" class="navbar-brand" width="50" height="50">
+    <!--Boton responsive de menú "hamburguesa"-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Navbar content -->
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <!-- Links con routing -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/search-movies">Search</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/now-playing">Now Playing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/popular">Popular</a>
+        </li>
+      </ul>
+    </div>
+  </nav> 
+</div>
+<div class="content mt-5">
+  <router-outlet></router-outlet>
+</div>

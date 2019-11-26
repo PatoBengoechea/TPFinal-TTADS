@@ -1,0 +1,48 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="row">
+    <div class="col-4">
+      <img class="img-fluid img-thumbnail" src="{{ imgBaseURL + imgPosterSize + movie.poster_path }}" alt="Poster de la película {{movie.title}}">
+    </div>
+    <div class="col-8">
+      <h1 class="display-4">{{ movie.title }}</h1>
+      <p class="lead"><strong>Release Date: </strong>{{ movie.release_date }}</p>
+      <p class="card-text" style="text-align: justify"><strong>Overview: </strong>{{ movie.overview }}</p>
+      <p class="card-text"><strong>Original Title: </strong>{{ movie.original_title }}</p>
+      <p class="card-text"><strong>Original Language: </strong>{{ movie.original_language }}</p>
+      <p class="card-text"><strong>Genres:</strong></p>
+      <ul *ngFor="let g of movie.genres">
+        <li>{{ g.name }}</li>
+      </ul>
+      <p class="card-text"><strong>Popularity: </strong>{{ movie.popularity }}</p>
+      <p class="card-text"><strong>Vote Count: </strong>{{ movie.vote_count }}</p>
+      <button class="btn btn-info" (click)="goBack()">Go Back</button>
+      <button data-toggle="collapse" data-target="#votos" class="btn btn-success">Vote</button>
+      <div id="votos" class="collapse btn-group">
+        <button type="button" class="btn btn-secondary" (click)="rateMovie(1)" data-toggle="modal" data-target="#exampleModal">1</button>
+        <button type="button" class="btn btn-secondary" (click)="rateMovie(2)" data-toggle="modal" data-target="#exampleModal">2</button>
+        <button type="button" class="btn btn-secondary" (click)="rateMovie(3)" data-toggle="modal" data-target="#exampleModal">3</button>
+        <button type="button" class="btn btn-secondary" (click)="rateMovie(4)" data-toggle="modal" data-target="#exampleModal">4</button>
+        <button type="button" class="btn btn-secondary" (click)="rateMovie(5)" data-toggle="modal" data-target="#exampleModal">5</button>
+        <button type="button" class="btn btn-secondary" (click)="rateMovie(6)" data-toggle="modal" data-target="#exampleModal">6</button>
+        <button type="button" class="btn btn-secondary" (click)="rateMovie(7)" data-toggle="modal" data-target="#exampleModal">7</button>
+        <button type="button" class="btn btn-secondary" (click)="rateMovie(8)" data-toggle="modal" data-target="#exampleModal">8</button>
+        <button type="button" class="btn btn-secondary" (click)="rateMovie(9)" data-toggle="modal" data-target="#exampleModal">9</button>
+        <button type="button" class="btn btn-secondary" (click)="rateMovie(10)" data-toggle="modal" data-target="#exampleModal">10</button>
+      </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>{{this.message}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>

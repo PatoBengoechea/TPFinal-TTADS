@@ -1,0 +1,34 @@
+Bengoechea, Patricio. Legajo: 42060
+Gomez, Nicolas. Legajo: 42114
+Scandolo, Nicolas. Legajo: 42056
+
+PASOS BÁSICOS A REALIZAR
+    1) Instalar MongoDB.
+    2) Crear una base de datos con MongoDB.
+    3) Instalar las dependencias (Fichero de configuración principal package.json).
+    4) Hacer la conexión a MongoDB desde NodeJS con Mongoose. (en el index.js).
+    5) Crear el servidor web con NodeJS. API RESTful en Node.js (en el app.js).
+    6) Cargar el fichero app.js con la configuración de Express (en el index.js).
+    7) Crear los esquemas y modelos.
+    8) Crear un controlador.
+    9) Crear la ruta para el controlador.
+    10) Importar y cargar las rutas en el servidor (app.js).
+    11) Testear mi api con Postman.
+
+    info: https://medium.com/williambastidasblog/estructura-de-una-api-rest-con-nodejs-express-y-mongodb-cdd97637b18b
+
+Modulos faltantes: 
+abmc pelicula x
+/movie/:id x
+/popular    
+/now-playing
+comentarios
+alta x
+votos en una pelicula
+alta de actores x
+/listar-actores
+
+
+Modificar nuestro frontend para hacer abmc peliculas solamente. 
+Lo de actores y comentarios solo hacer 
+backend, no hace falta modificar el frontend.
