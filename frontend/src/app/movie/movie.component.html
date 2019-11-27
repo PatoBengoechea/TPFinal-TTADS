@@ -1,0 +1,12 @@
+<div *ngIf="movie">  
+  <div class="card">
+    <img class="card-img-top mx-auto d-block" src="{{ movie.img_path }}" alt="Poster de la película {{movie.name}}">
+    <div class="card-body">      
+        <h5 class="card-title text-center">{{ movie.name }}</h5>
+        <p class="card-text"><strong>Genero: </strong> {{ movie.genre }}</p>
+        <p class="card-text"><strong>Popularity: </strong> {{ movie.vote }}</p>
+        <p class="card-text"><strong>Release date: </strong> {{ movie.release_date }}</p>
+        <!--<button class="btn btn-info btn-block nav-link" routerLink="movie-details/{{movie.id}}" (click)="search(movie.id)">DETAILS</button>-->
+    </div>     
+  </div>     
+</div>

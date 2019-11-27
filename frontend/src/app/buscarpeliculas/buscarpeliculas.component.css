@@ -1,0 +1,25 @@
+.search{
+    display: inline-block;
+    margin: 30px;
+    align-items: baseline;
+}
+
+input{
+    width: 300px;
+}
+input, button{
+    display: inline-block;
+    align-items: center;
+    align-content: center;
+}
+
+.films{
+    margin: 10px;
+}
+
+li{
+    display: inline-block;
+    width: 400px;
+    height: 100px;
+    margin: 15px;;
+}
