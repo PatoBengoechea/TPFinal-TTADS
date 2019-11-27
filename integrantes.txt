@@ -16,19 +16,3 @@ PASOS BÁSICOS A REALIZAR
     11) Testear mi api con Postman.
 
     info: https://medium.com/williambastidasblog/estructura-de-una-api-rest-con-nodejs-express-y-mongodb-cdd97637b18b
-
-Modulos faltantes: 
-abmc pelicula x
-/movie/:id x
-/popular    
-/now-playing
-comentarios
-alta x
-votos en una pelicula
-alta de actores x
-/listar-actores
-
-
-Modificar nuestro frontend para hacer abmc peliculas solamente. 
-Lo de actores y comentarios solo hacer 
-backend, no hace falta modificar el frontend.
