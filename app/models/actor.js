@@ -1,10 +1,13 @@
 // Llamada al módulo de mongoose
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 
 // Crear schema
-var actorSchema= new mongoose.Schema({
-	name: {type:String, required: true},
-	nationality: {type:String, required: true}
-}, {collection: "actor"});
+var actorSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    nationality: { type: String, required: true }
+  },
+  { collection: "actor" }
+);
 
-mongoose.model('actor', actorSchema);
+mongoose.model("actor", actorSchema);
