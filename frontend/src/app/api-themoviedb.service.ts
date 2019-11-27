@@ -31,8 +31,8 @@ export class ApiThemoviedbService {
   // Buscar películas por nombre
   searchFilms(film: string) {
     //this.searchURL = this.dominioURL + "/search/movie?" + this.apiKey + this.language + "&query=" + film + "&page=1&include_adult=false";
-    this.searchURL = this.dominioURL + "movie";
-    return this.http.get(this.searchURL);
+    this.searchURL = this.dominioURL + "/movie/" + film
+    return this.http.get(this.searchURL)
   }
 
   // Buscar detalles de una película 

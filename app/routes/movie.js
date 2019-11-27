@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
 });
 
 // Traer una película
-router.get('/:id', (req, res, next) => {
+router.get('/unique/:id', (req, res, next) => {
     let id = req.params.id;
     movie.find({ "_id": ObjectId(id) })
         .populate('actors')
@@ -26,6 +26,20 @@ router.get('/:id', (req, res, next) => {
         .catch(next);
 
 });
+
+//Traer peliculas en base al titulo
+router.get('/:partialTitle', (req,res,next) => {
+    let partialTitle = req.params.partialTitle
+    movie.find({ name: { $regex: partialTitle, $options: "i"} })
+        .populate('actors')
+        .then(movies => {
+            if (!movies) { return res.sendStatus(401)}
+            return res.json({'movies' : movies})
+        })
+        .catch(err => {
+            console.log(err)
+        })
+})
 
 // Create movie
 router.post('/', (req, res, next) => {
