@@ -14,6 +14,6 @@
  </div>
  <!-- Fin Jumbotron-->
  <!-- Componente de películas -->
- <div *ngIf="popularMovies.length" class="row" >
+ <div *ngIf="popularMovies.length" class="row">
     <app-movie *ngFor="let movie of popularMovies" [movie]="movie" class="col-3"></app-movie>
 </div>
