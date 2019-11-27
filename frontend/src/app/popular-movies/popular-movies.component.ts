@@ -6,7 +6,7 @@ import { ApiThemoviedbService } from '../api-themoviedb.service';
   templateUrl: './popular-movies.component.html',
   styleUrls: ['./popular-movies.component.css']
 })
-export class popularMoviesComponent implements OnInit {
+export class PopularMoviesComponent implements OnInit {
 
   private popularMovies: any = []; 
 
