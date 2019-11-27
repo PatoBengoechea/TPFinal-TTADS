@@ -9,8 +9,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class MovieComponent implements OnInit {
   @Input() movie;
-  private imgBaseURL = "https://image.tmdb.org/t/p/";
-  private imgPosterSize = "w780";
+  // private imgBaseURL = "https://image.tmdb.org/t/p/";
+  // private imgPosterSize = "w780";
 
   constructor(private route: Router) {}
 
