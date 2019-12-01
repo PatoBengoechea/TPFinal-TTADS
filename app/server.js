@@ -4,6 +4,9 @@ const express = require('express');
 // Cargar el módulo de mongoose para poder conectarnos a MongoDB
 const mongoose = require('mongoose');
 
+// Cargar modulo colors
+const colors = require('colors');
+
 // Nos permite convertir los datos que nos llegan en las peticiones al servidor en objetos JSON
 const bodyParser = require('body-parser');
 
@@ -42,7 +45,7 @@ mongoose.connect('mongodb+srv://admin:admin@cluster0-geyoz.mongodb.net/cinema',
 
     // Crear el servidor WEB con NodeJS
     app.listen(port, (err) => {
-      console.log('We are live on ' + port);
+      console.log(colors.green('We are live on', port));
     });
 
 });
