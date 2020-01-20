@@ -4,6 +4,7 @@
   "description": "TP 2 1 - Enunciado 1.1 - Desarrollo",
   "main": "server.js",
   "scripts": {
+    "start": "node app/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,10 +18,12 @@
   },
   "homepage": "https://github.com/PatoBengoechea/tp2-2018#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "colors": "^1.4.0",
     "cors": "^2.8.4",
     "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
     "mongodb": "^3.3.5",
     "mongoose": "^5.7.13"

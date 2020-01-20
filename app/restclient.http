@@ -1,0 +1,38 @@
+POST http://localhost:3000/api/authentication/signup HTTP/1.1
+content-type: application/json
+
+{
+    "name": "nicoTest",
+    "email": "nicoTest@ttads.com",
+    "password": "12345"
+}
+
+### 
+GET http://localhost:3000/api/authentication/info 
+content-type: application/json
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkZTk5NmE1ZDFjOWVkNTVkOGY4NjIzNiIsImlhdCI6MTU3NTU4OTU0MiwiZXhwIjoxNTc1Njc1OTQyfQ.GUg2070PKYfRy0hg1zVFZZzwyAgy9UMkS2Z6OLqRuu9
+
+{
+    "name": "nicoTest",
+    "email": "nicotest@ttads.com",
+    "password": "12345"
+}
+
+###
+GET http://localhost:3000/api/authentication/info 
+content-type: application/json
+
+{
+    "name": "nicoTest",
+    "email": "nicotest@ttads.com",
+    "password": "12345"
+}
+
+### 
+POST http://localhost:3000/api/authentication/signin
+content-type: application/json
+
+{
+    "email": "nicotest@ttads.com",
+    "password": "12345"
+}

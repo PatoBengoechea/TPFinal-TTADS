@@ -1,4 +1,4 @@
-mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/movie');
 mongoose.set('debug', true);
@@ -7,7 +7,7 @@ require('./models/movie');
 require('./models/actor');
 
 var Movie = mongoose.model('movie');
-var Actor = mongoose.model('actor')
+var Actor = mongoose.model('actor');
 
 Movie.find({})
 	.populate('actors')

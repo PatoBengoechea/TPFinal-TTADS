@@ -1,10 +1,12 @@
-var mongoose = require('mongoose');
-var router = require('express').Router();
-var movie = mongoose.model('movie');
+const mongoose = require('mongoose');
+const { Router } = require('express');
+const router = Router();
+
+var movie = require('../models/movie');
 
 var ObjectId = mongoose.Types.ObjectId;
 
-// Traer todas las películas
+// Traer todas las películas`
 router.get('/', (req, res, next) => {
     movie.find({})
         .then(movies => {
