@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { PopularMoviesComponent } from './popular-movies/popular-movies.component';
 import { MovieComponent } from './movie/movie.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
     PopularMoviesComponent,
     MovieComponent,
     MovieDetailsComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

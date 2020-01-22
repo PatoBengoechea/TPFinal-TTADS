@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const config = require("../utilities/config");
+const colors = require("colors");
 
 function verifyToken(req, res, next) {
   try {
