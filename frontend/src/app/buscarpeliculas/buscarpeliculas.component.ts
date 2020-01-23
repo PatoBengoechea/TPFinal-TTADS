@@ -25,7 +25,7 @@ export class BuscarpeliculasComponent implements OnInit {
   }
 
   searchFilm(nameToSearch: string): void{
-    this.service.searchFilms(nameToSearch).subscribe((data: any) => this.films = data.movies);
+    this.service.searchFilms(nameToSearch).subscribe((data: any) => this.films = data.data.movies);
     //this.service.searchFilms(nameToSearch).subscribe((data: any) => console.log(data.results));
   }
 

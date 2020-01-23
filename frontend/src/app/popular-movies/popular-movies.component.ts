@@ -17,7 +17,7 @@ export class PopularMoviesComponent implements OnInit {
   }
 
   searchpopularMovies(): void {
-    this.service.searchPopularMovies().subscribe((response:any)=> this.popularMovies = response.movies);
+    this.service.searchPopularMovies().subscribe((response:any)=> this.popularMovies = response.data.movies);
     //this.service.searchPopularMovies().subscribe((response:any)=> console.log(response.results));
 
   }

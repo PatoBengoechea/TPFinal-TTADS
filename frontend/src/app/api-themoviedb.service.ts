@@ -1,5 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { print } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class ApiThemoviedbService {
   private session = "https://www.themoviedb.org/authentication/session/new?";
   private searchURL: string;
   private guest_session: any;
+  private headers = new HttpHeaders({'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMjYwM2I0ODBhZTRhMmYxMDZjM2IxZiIsImlhdCI6MTU3OTczNTkxNSwiZXhwIjoxNTc5ODIyMzE1fQ.hC6m_uXl5GwqzDkbEu_XClBeh335Yl8TY72wxJ9726U' })
   
   constructor(private http: HttpClient) { 
    this.getGuestSession();    
@@ -32,28 +34,33 @@ export class ApiThemoviedbService {
   searchFilms(film: string) {
     //this.searchURL = this.dominioURL + "/search/movie?" + this.apiKey + this.language + "&query=" + film + "&page=1&include_adult=false";
     this.searchURL = this.dominioURL + "/movie/" + film
-    return this.http.get(this.searchURL)
+    let options = { headers: this.headers}
+    let result = this.http.get(this.searchURL, options)
+    console.log(result)
+    return result
   }
 
   // Buscar detalles de una película 
   getMovieDetails(id: number) {
     this.searchURL = this.dominioURL + "/movie/"  + id + "?" + this.apiKey + this.language;
-    return this.http.get(this.searchURL);
+    let options = { headers: this.headers}
+    return this.http.get(this.searchURL, options);
   }
 
   // Buscar películas en cartelera
   searchNowPlayingMovies() {
     //this.searchURL = this.dominioURL + "/movie/now_playing?" + this.apiKey + this.language + "&page=1";
     this.searchURL = this.dominioURL + "/movie/movie/now-playing";
-
-    return this.http.get(this.searchURL);
+    let options = { headers: this.headers}
+    return this.http.get(this.searchURL, options);
   }
 
   // Buscar películas populares
   searchPopularMovies() {
     //this.searchURL = this.dominioURL + "/movie/popular?page=1" + this.language + this.apiKey;
     this.searchURL = this.dominioURL + "/movie/movie/popular";
-    return this.http.get(this.searchURL);
+    let options = { headers: this.headers}
+    return this.http.get(this.searchURL, options);
   }
 
   //Votar una película
@@ -64,7 +71,8 @@ export class ApiThemoviedbService {
     // https://api.themoviedb.org/3/movie/{movie_id}/rating?api_key=afbc1995a41f72f35622f748d82068dc&guest_session_id=<<guest_session_id>>
     body_rate.value = vote;
     this.searchURL = this.dominioURL + "/movie/" + id + "/rating?" + this.apiKey + "&guest_session_id=" + this.guest_session.guest_session_id;
-    return this.http.post(this.searchURL, body_rate);
+    let options = { headers: this.headers}
+    return this.http.post(this.searchURL, body_rate, options);
 
 
     /* Sin guest_session_id

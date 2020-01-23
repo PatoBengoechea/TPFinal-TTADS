@@ -22,7 +22,7 @@ export class NowPlayingMoviesComponent implements OnInit {
   searchNowPlayingMovies(): void {
     this.service
       .searchNowPlayingMovies()
-      .subscribe((data: any) => (this.nowPlayingMovies = data.movies));
+      .subscribe((data: any) => (this.nowPlayingMovies = data.data.movies));
     //console.log(this.service);
     //console.log(this.nowPlayingMovies);
   }

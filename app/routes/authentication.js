@@ -52,7 +52,15 @@ router.post("/signin", async (req, res) => {
     // Search for user in DB
     const user = await User.findOne({ email: req.body.email });
     // Validate user existence
-    if (!user) return res.status(404).send("The email doesn't exists");
+    if (!user) {
+      return res
+        .status(404)
+        .json({
+          status: true,
+          data: null,
+          message: "Usuario no encontrado"
+        })
+    }
     // Validate correct password
     const validatedPassword = await user.comparePassword(req.body.password);
 
@@ -69,15 +77,19 @@ router.post("/signin", async (req, res) => {
     });
 
     res.json({
-      auth: true,
-      token
+      status: true,
+      data: {
+        auth: true,
+        token },
+      message: null
+      
     });
 
   } catch (error) {
     console.log(colors.red(error));
     return res
       .status(500)
-      .json({ message: "There was a problem in the singin" });
+      .json({status: false, data: null, message: "There was a problem in the singin" });
   }
 });
 

@@ -12,11 +12,13 @@ router.get("/", (req, res, next) => {
     .find({})
     .then(movies => {
       if (!movies) {
-        return res.sendStatus(401);
+        return res.json({status: false, data: null, message: "No hay peliculas cargadas"})
       }
-      return res.json({ movies: movies });
+      return res.json({status: true, data: { movies: movies }, message: null});
     })
-    .catch(next);
+    .catch(next => {
+      return res.json({status: false, data: null, message: "Error al obtener peliculas"})
+    });
 });
 
 // Traer una película
@@ -27,11 +29,13 @@ router.get("/unique/:id", (req, res, next) => {
     .populate("actors")
     .then(movies => {
       if (!movies) {
-        return res.sendStatus(401);
+        return res.json({status: false, data: null, message: "No hay pelicula con ese ID"})
       }
-      return res.json({ movies: movies });
+      return res.json({status: true, data: { movies: movies }, message: null });
     })
-    .catch(next);
+    .catch(next => { 
+      return res.json({status: false, data: null, message: "Error al obtener pelicula"})
+    });
 });
 
 //Traer peliculas en base al titulo
@@ -42,12 +46,14 @@ router.get("/:partialTitle", (req, res, next) => {
     .populate("actors")
     .then(movies => {
       if (!movies) {
-        return res.sendStatus(401);
+        return res.json({status: false, data: null, message: "No hay peliculas con ese ID"})
       }
-      return res.json({ movies: movies });
+      return res.json({status: true, data: {movies: movies }, message: null});
     })
     .catch(err => {
-      console.log(err);
+      console.log(err => {
+        return res.json({status: false, data: null, message: "Error al obtener peliculas"})
+      });
     });
 });
 
@@ -71,11 +77,11 @@ router.post("/", (req, res, next) => {
   mo.save()
     .then(doc => {
       console.log(doc);
-      res.send("name:" + name + " " + "genre:" + genre + " " + "year:" + year);
+      return res.json({status: true, data: {result: "Pelicula guardada"}, message: null})
     })
     .catch(err => {
       console.log(err);
-      res.send("Ha ocurrido un error, intentelo de nuevo mas tarde");
+      return res.json({status: false, data: null, message: "Error al crear pelicula"})
     });
 
   next();
@@ -92,8 +98,12 @@ updateMovie = function(req, res) {
     } else console.log("Ha ocurrido el siguiente eror: " + err);
   });
   movie.save(function(err) {
-    if (!err) console.log / "Película actualizada!";
-    else console.log("Ha ocurrido el siguiente eror: " + err);
+    if (!err) {
+      return res.json({status: true, data: {result: "Pelicula modificada"}, message: null})
+    }
+    else {
+      return res.json({status: false, data: null, message: "Error al actualizar peliculas"})
+    }
   });
   res.send(movieToUpdate);
 };
@@ -105,7 +115,8 @@ router.put("/movie/:id", updateMovie);
 router.delete("/:id", (req, res, next) => {
   let id = req.params.id;
   movie.findByIdAndRemove(id);
-  res.sendStatus(200);
+  res.status(200)
+  return res.json({status: false, data: null, message: "Error al obtener peliculas"})
 });
 
 // Votar una película
@@ -115,15 +126,20 @@ router.put("/vote/:id", (req, res, next) => {
     movie
       .findOneAndUpdate({ _id: ObjectId(id) }, { $inc: { vote: 1 } })
       .catch(err => {
-        console.log(err);
-        res.send("Ha ocurrido un error, intentelo de nuevo mas tarde");
+        res.status(400)
+        return res.json({status: true, data: null, message: "Error al votar una pelicula"})
       });
   } else {
     movie
       .findOneAndUpdate({ _id: ObjectId(id) }, { $inc: { vote: -1 } })
+      .then( result => {
+        res.status(200)
+        return res.json({status: true, data: {result: "Votacion aceptada"}, message: null})
+      })
       .catch(err => {
         console.log(err);
-        res.send("Ha ocurrido un error, intentelo de nuevo mas tarde");
+        res.status(400)
+        return res.json({status: false, data: null, message: "Error al votar una pelicula"})
       });
   }
 
@@ -136,11 +152,16 @@ router.get("/movie/popular", (req, res, next) => {
     .find({ vote: { $gte: 10 } })
     .then(movies => {
       if (!movies) {
-        return res.sendStatus(401);
+        res.status(200)
+        return res.json({status: true, data: null, message: "No hay peliculas populares disponibles"})
       }
-      return res.json({ movies: movies });
+      res.status(200)
+      return res.json({status: true, data: { movies: movies }, message: null});
     })
-    .catch(next);
+    .catch(next => {
+      res.status(400)
+      return res.json({status: false, data: null, message: "Error al obtener peliculas populares"})
+    });
 });
 
 // Traer now-playing
@@ -151,11 +172,16 @@ router.get("/movie/now-playing", (req, res, next) => {
     .find({ release_date: { $gte: date2 } })
     .then(movies => {
       if (!movies) {
-        return res.sendStatus(401);
+        res.status(200)
+        return res.json({status: true, data: null, message: "No hay peliculas en cartelera"})
       }
-      return res.json({ movies: movies });
+      res.status(200)
+      return res.json({status: true, data: { movies: movies }, message: null});
     })
-    .catch(next);
+    .catch(next => { 
+      res.status(400)
+      return res.json({status: false, data: null, message: "Error al obtener peliculas"})
+    });
 });
 
 // Traer películas de un actor
@@ -166,11 +192,16 @@ router.get("/movieActor/:id_actor", (req, res, next) => {
     .populate("actors")
     .then(actorMovies => {
       if (!actorMovies) {
-        return res.sendStatus(401);
+        res.status(200)
+        return res.json({status: true, data: null, message: "No hay peliculas para ese actor"})
       }
-      return res.json({ actorMovies: actorMovies });
+      res.status(200)
+      return res.json({status: true, data: { actorMovies: actorMovies }, message: null});
     })
-    .catch(next);
+    .catch(next => {
+      res.status(400)
+      return res.json({status: false, data: null, message: "Error al obtener peliculas"})
+    });
 });
 
 module.exports = router;

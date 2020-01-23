@@ -13,11 +13,13 @@ router.get("/", (req, res, next) => {
     .find({})
     .then(actors => {
       if (!actor) {
-        return res.sendStatus(401);
+        return res.json({status: false, data: null, message: "No hay actores cargados"})
       }
-      return res.json({ actors: actors });
+      return res.json({ status: true, data: {actors: actors}, message: null });
     })
-    .catch(next);
+    .catch(next => {
+      return res.json({status: false, data: null, message: "Ha ocurrido un error al realizar la peticion"})
+    })
 });
 
 // Get actor by ID
@@ -27,11 +29,13 @@ router.get("/:id", (req, res, next) => {
     .findById(id)
     .then(actorById => {
       if (!actorById) {
-        return res.sendStatus(401);
+        return res.json({status: false, data: null, message: "Recurso no disponible"})
       }
-      return res.json({ actorById: actorById });
+      return res.json({status: true, data:{ actorById: actorById }, message: null });
     })
-    .catch(next);
+    .catch(next => {
+      res.json({status: false, data: null, message: "Ha ocurrido al realizar una peticion"})
+    });
 });
 
 // Create actor
@@ -40,13 +44,12 @@ router.post("/", (req, res, next) => {
     name: req.body.name,
     nationality: req.body.nationality
   });
-  res.send("New actor created succesfully!");
   ac.save()
     .then(doc => {
-      console.log(doc).yellow;
+      return res.json({status: true, data: {result: "Actor cargado"}, message: "No hay actores cargados"})
     })
     .catch(err => {
-      console.log(colors.red("Error saving new actor:", err));
+      res.json({status: false, data: null, message: "No hay actores cargados"})
     });
 });
 
@@ -61,7 +64,7 @@ router.put("/:id", (req, res, next) => {
     .then(actorToUpdate => {
       if (!actorToUpdate) {
         console.log("Actor not found").yellow;  
-        return res.sendStatus(401);
+        return res.json({status: false, data: null, message: "No se ha encontrado el actor"})
       } else {
         actorToUpdate.name = name;
         actorToUpdate.nationality = nationality;
@@ -71,11 +74,10 @@ router.put("/:id", (req, res, next) => {
           .save()
           .then(doc => {
             console.log(doc).yellow;
-            res.send("Actor updated succesfully!");
+            return res.json({status: true, data: {result: "Actor modificado"}, message: null})
           })
           .catch(err => {
-            console.log("Error updating actor", err).red;
-            res.send("Ha ocurrido el siguiente error:", err);
+            return res.json({status: false, data: null, message: "Error al modificar un actor"})
           });
       }
     })
@@ -87,9 +89,9 @@ router.delete("/:id", (req, res, next) => {
   try {
     let id = req.params.id;
     actor.findByIdAndRemove(id);
-    res.sendStatus(200);      
+    return res.json({status: true, data: {result: "Actor eliminado"}, message: null})
   } catch (error) {
-    console.log("Error deleting actor:", error).red;
+    return res.json({status: false, data: null, message: "Error al eliminar actor"})
   }    
   //res.send("delete client:"+id);
   //next();
