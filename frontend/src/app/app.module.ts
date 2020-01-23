@@ -18,6 +18,8 @@ import { PopularMoviesComponent } from './popular-movies/popular-movies.componen
 import { MovieComponent } from './movie/movie.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { SignupComponent } from './signup/signup.component';
+import { SigninComponent } from './signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     MovieComponent,
     MovieDetailsComponent,
     NavbarComponent,
+    SignupComponent,
+    SigninComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,8 @@ import { BuscarpeliculasComponent } from './buscarpeliculas/buscarpeliculas.comp
 import { NowPlayingMoviesComponent } from './now-playing-movies/now-playing-movies.component';
 import { PopularMoviesComponent } from './popular-movies/popular-movies.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { SigninComponent } from './signin/signin.component';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes=[
   {path: '', redirectTo:'home', pathMatch:'full'},
@@ -14,7 +16,9 @@ const routes: Routes=[
   {path: 'popular', component: PopularMoviesComponent},
   {path: 'now-playing', component: NowPlayingMoviesComponent},
   {path: 'search-movies', component: BuscarpeliculasComponent},
-  {path: 'movie-details/:query', component: MovieDetailsComponent}
+  {path: 'movie-details/:query', component: MovieDetailsComponent},
+  {path: 'signin', component: SigninComponent},
+  {path: 'signup', component: SignupComponent}
 ]
 
 @NgModule({
