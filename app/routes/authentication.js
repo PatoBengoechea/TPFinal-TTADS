@@ -53,61 +53,63 @@ router.post("/signin", async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     // Validate user existence
     if (!user) {
-      return res
-        .status(404)
-        .json({
-          status: true,
-          data: null,
-          message: "Usuario no encontrado"
-        })
+      return res.status(404).json({
+        status: true,
+        data: null,
+        message: "Mail not found"
+      });
     }
     // Validate correct password
     const validatedPassword = await user.comparePassword(req.body.password);
 
     if (!validatedPassword)
       return res.status(401).json({
-        auth: false,
-        message: "Wrong password",
-        token: null
+        status: false,
+        data: {
+          auth: false,
+          token: null
+        },
+        message: "Wrong password"
       });
 
     // se setea 'id: user._id' pq proviene desde mongodb y si no lo asignamos como objeto no se lee comi json
-    const token = jwt.sign({id: user._id}, config.secret, {
+    const token = jwt.sign({ id: user._id }, config.secret, {
       expiresIn: 60 * 60 * 24
     });
 
-    res.json({
+    return res.json({
       status: true,
       data: {
         auth: true,
-        token },
-      message: null
-      
+        token
+      },
+      message: "Succesfully logged"
     });
-
   } catch (error) {
     console.log(colors.red(error));
-    return res
-      .status(500)
-      .json({status: false, data: null, message: "There was a problem in the singin" });
+    res.status(500).json({
+      status: false,
+      data: null,
+      message: "There was a problem in the singin"
+    });
   }
 });
 
 /* Info valid user */
 // Ruta protegida
-router.get("/info", verifyToken, async (req, res) => {
+router.get("/protected", verifyToken, async (req, res) => {
   try {
     // Search for user in DB
-    const user = await User.findById(req.actualUserId, { password: 0 });
+    const user = await User.findById(req.userId, { password: 0, createdAt: 0, updatedAt: 0 });
     // Validate user
     if (!user)
-      return res.sendStatus(404).json({
+      return res.status(404).json({
         auth: true,
         message: "No user found"
       });
 
     // Configure response to client
-    res.json({
+    return res.json({
       auth: true,
       message: "You are authorized to be here",
       user
@@ -119,6 +121,5 @@ router.get("/info", verifyToken, async (req, res) => {
       .json({ message: "There was a problema with the authorization" });
   }
 });
-
 
 module.exports = router;

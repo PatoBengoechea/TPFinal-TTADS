@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ApiThemoviedbService } from "../api-themoviedb.service";
+import { ApiThemoviedbService } from "../../services/api-themoviedb.service";
 
 @Component({
   selector: "app-now-playing-movies",

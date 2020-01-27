@@ -4,10 +4,10 @@ const router = Router();
 const verifyToken = require("../utilities/validateToken");
 
 // Rutas accesibles
-router.use("/api/authentication", require("./authentication"));
+router.use("/authentication", require("./authentication"));
 
 // Rutas Protegidas
-router.use("/api/movie", verifyToken, require("./movie"));
-router.use("/api/actor", verifyToken, require("./actor"));
+router.use("/movie", verifyToken, require("./movie"));
+router.use("/actor", verifyToken, require("./actor"));
 
 module.exports = router;

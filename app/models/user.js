@@ -8,7 +8,10 @@ const userSchema = new Schema(
     email: { type: String, required: true },
     password: { type: String, required: true }
   },
-  { collection: "user" }
+  {
+    timestamps: true,
+    collection: "user"
+  }
 );
 
 userSchema.methods.encryptPassword = async password => {

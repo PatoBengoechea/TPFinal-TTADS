@@ -1,0 +1,69 @@
+<div class="container mt-5">
+  <div class="mx-auto col-md-4">
+    <div class="card border-dark">
+      <h5 class="card-header">Sign Up</h5>
+      <div class="card-body">
+        <form (submit)="signUp()">
+          <div class="form-group">
+            <input
+              class="form-control"
+              type="text"
+              name="username"
+              [(ngModel)]="newUser.username"
+              aria-describedby="usernameHelp"
+              placeholder="Username"
+              required
+              autofocus
+            />
+            <small id="usernameHelp" class="form-text text-muted">
+              Set the name you want us to call you
+            </small>
+          </div>
+          <div class="form-group">
+            <input
+              class="form-control"
+              type="email"
+              name="email"
+              [(ngModel)]="newUser.email"
+              aria-describedby="emailHelp"
+              placeholder="Email address"
+              required
+            />
+            <small id="emailHelp" class="form-text text-muted">
+              Example: meca@gmail.com
+            </small>
+          </div>
+          <div class="form-group">
+            <input
+              class="form-control"
+              type="password"
+              name="password"
+              [(ngModel)]="newUser.password"
+              aria-describedby="passwordHelp"
+              placeholder="Password"
+              required
+            />
+            <small id="passwordHelp" class="form-text text-muted">
+              Must be between 5 and 8 caracters with letters and numbers
+            </small>
+          </div>
+          <div class="form-group">
+            <input
+              class="form-control"
+              type="password"
+              name="passwordCheck"
+              [(ngModel)]="newUser.passwordCheck"
+              aria-describedby="passwordCheckHelp"
+              placeholder="Password Check"
+              required
+            />
+            <small id="passwordCheckHelp" class="form-text text-muted">
+              Password Check must be the same as Password
+            </small>
+          </div>
+          <button type="submit" class="btn btn-info btn-block">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

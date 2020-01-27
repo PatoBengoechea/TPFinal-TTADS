@@ -12,12 +12,24 @@ router.get("/", (req, res, next) => {
     .find({})
     .then(movies => {
       if (!movies) {
-        return res.json({status: false, data: null, message: "No hay peliculas cargadas"})
+        return res.json({
+          status: false,
+          data: null,
+          message: "No hay peliculas cargadas"
+        });
       }
-      return res.json({status: true, data: { movies: movies }, message: null});
+      return res.json({
+        status: true,
+        data: { movies: movies },
+        message: null
+      });
     })
     .catch(next => {
-      return res.json({status: false, data: null, message: "Error al obtener peliculas"})
+      return res.json({
+        status: false,
+        data: null,
+        message: "Error al obtener peliculas"
+      });
     });
 });
 
@@ -29,12 +41,24 @@ router.get("/unique/:id", (req, res, next) => {
     .populate("actors")
     .then(movies => {
       if (!movies) {
-        return res.json({status: false, data: null, message: "No hay pelicula con ese ID"})
+        return res.json({
+          status: false,
+          data: null,
+          message: "No hay pelicula con ese ID"
+        });
       }
-      return res.json({status: true, data: { movies: movies }, message: null });
+      return res.json({
+        status: true,
+        data: { movies: movies },
+        message: null
+      });
     })
-    .catch(next => { 
-      return res.json({status: false, data: null, message: "Error al obtener pelicula"})
+    .catch(next => {
+      return res.json({
+        status: false,
+        data: null,
+        message: "Error al obtener pelicula"
+      });
     });
 });
 
@@ -46,25 +70,31 @@ router.get("/:partialTitle", (req, res, next) => {
     .populate("actors")
     .then(movies => {
       if (!movies) {
-        return res.json({status: false, data: null, message: "No hay peliculas con ese ID"})
+        return res.json({
+          status: false,
+          data: null,
+          message: "No hay peliculas con ese ID"
+        });
       }
-      return res.json({status: true, data: {movies: movies }, message: null});
+      return res.json({
+        status: true,
+        data: { movies: movies },
+        message: null
+      });
     })
     .catch(err => {
       console.log(err => {
-        return res.json({status: false, data: null, message: "Error al obtener peliculas"})
+        return res.json({
+          status: false,
+          data: null,
+          message: "Error al obtener peliculas"
+        });
       });
     });
 });
 
 // Create movie
 router.post("/", (req, res, next) => {
-  let name = req.body.name;
-  let genre = req.body.genre;
-  let year = req.body.year;
-  let release_date = req.body.release_date;
-  let vote = req.body.vote;
-
   let mo = new movie({
     name: req.body.name,
     genre: req.body.genre,
@@ -77,11 +107,19 @@ router.post("/", (req, res, next) => {
   mo.save()
     .then(doc => {
       console.log(doc);
-      return res.json({status: true, data: {result: "Pelicula guardada"}, message: null})
+      return res.json({
+        status: true,
+        data: { result: "Pelicula guardada" },
+        message: null
+      });
     })
     .catch(err => {
       console.log(err);
-      return res.json({status: false, data: null, message: "Error al crear pelicula"})
+      return res.json({
+        status: false,
+        data: null,
+        message: "Error al crear pelicula"
+      });
     });
 
   next();
@@ -99,10 +137,17 @@ updateMovie = function(req, res) {
   });
   movie.save(function(err) {
     if (!err) {
-      return res.json({status: true, data: {result: "Pelicula modificada"}, message: null})
-    }
-    else {
-      return res.json({status: false, data: null, message: "Error al actualizar peliculas"})
+      return res.json({
+        status: true,
+        data: { result: "Pelicula modificada" },
+        message: null
+      });
+    } else {
+      return res.json({
+        status: false,
+        data: null,
+        message: "Error al actualizar peliculas"
+      });
     }
   });
   res.send(movieToUpdate);
@@ -115,8 +160,12 @@ router.put("/movie/:id", updateMovie);
 router.delete("/:id", (req, res, next) => {
   let id = req.params.id;
   movie.findByIdAndRemove(id);
-  res.status(200)
-  return res.json({status: false, data: null, message: "Error al obtener peliculas"})
+  res.status(200);
+  return res.json({
+    status: false,
+    data: null,
+    message: "Error al obtener peliculas"
+  });
 });
 
 // Votar una película
@@ -126,20 +175,32 @@ router.put("/vote/:id", (req, res, next) => {
     movie
       .findOneAndUpdate({ _id: ObjectId(id) }, { $inc: { vote: 1 } })
       .catch(err => {
-        res.status(400)
-        return res.json({status: true, data: null, message: "Error al votar una pelicula"})
+        res.status(400);
+        return res.json({
+          status: true,
+          data: null,
+          message: "Error al votar una pelicula"
+        });
       });
   } else {
     movie
       .findOneAndUpdate({ _id: ObjectId(id) }, { $inc: { vote: -1 } })
-      .then( result => {
-        res.status(200)
-        return res.json({status: true, data: {result: "Votacion aceptada"}, message: null})
+      .then(result => {
+        res.status(200);
+        return res.json({
+          status: true,
+          data: { result: "Votacion aceptada" },
+          message: null
+        });
       })
       .catch(err => {
         console.log(err);
-        res.status(400)
-        return res.json({status: false, data: null, message: "Error al votar una pelicula"})
+        res.status(400);
+        return res.json({
+          status: false,
+          data: null,
+          message: "Error al votar una pelicula"
+        });
       });
   }
 
@@ -152,15 +213,27 @@ router.get("/movie/popular", (req, res, next) => {
     .find({ vote: { $gte: 10 } })
     .then(movies => {
       if (!movies) {
-        res.status(200)
-        return res.json({status: true, data: null, message: "No hay peliculas populares disponibles"})
+        res.status(200);
+        return res.json({
+          status: true,
+          data: null,
+          message: "No hay peliculas populares disponibles"
+        });
       }
-      res.status(200)
-      return res.json({status: true, data: { movies: movies }, message: null});
+      res.status(200);
+      return res.json({
+        status: true,
+        data: { movies: movies },
+        message: null
+      });
     })
     .catch(next => {
-      res.status(400)
-      return res.json({status: false, data: null, message: "Error al obtener peliculas populares"})
+      res.status(400);
+      return res.json({
+        status: false,
+        data: null,
+        message: "Error al obtener peliculas populares"
+      });
     });
 });
 
@@ -172,15 +245,27 @@ router.get("/movie/now-playing", (req, res, next) => {
     .find({ release_date: { $gte: date2 } })
     .then(movies => {
       if (!movies) {
-        res.status(200)
-        return res.json({status: true, data: null, message: "No hay peliculas en cartelera"})
+        res.status(200);
+        return res.json({
+          status: true,
+          data: null,
+          message: "No hay peliculas en cartelera"
+        });
       }
-      res.status(200)
-      return res.json({status: true, data: { movies: movies }, message: null});
+      res.status(200);
+      return res.json({
+        status: true,
+        data: { movies: movies },
+        message: null
+      });
     })
-    .catch(next => { 
-      res.status(400)
-      return res.json({status: false, data: null, message: "Error al obtener peliculas"})
+    .catch(next => {
+      res.status(400);
+      return res.json({
+        status: false,
+        data: null,
+        message: "Error al obtener peliculas"
+      });
     });
 });
 
@@ -192,15 +277,27 @@ router.get("/movieActor/:id_actor", (req, res, next) => {
     .populate("actors")
     .then(actorMovies => {
       if (!actorMovies) {
-        res.status(200)
-        return res.json({status: true, data: null, message: "No hay peliculas para ese actor"})
+        res.status(200);
+        return res.json({
+          status: true,
+          data: null,
+          message: "No hay peliculas para ese actor"
+        });
       }
-      res.status(200)
-      return res.json({status: true, data: { actorMovies: actorMovies }, message: null});
+      res.status(200);
+      return res.json({
+        status: true,
+        data: { actorMovies: actorMovies },
+        message: null
+      });
     })
     .catch(next => {
-      res.status(400)
-      return res.json({status: false, data: null, message: "Error al obtener peliculas"})
+      res.status(400);
+      return res.json({
+        status: false,
+        data: null,
+        message: "Error al obtener peliculas"
+      });
     });
 });
 

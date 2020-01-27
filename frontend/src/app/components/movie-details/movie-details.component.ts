@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 // Servicio
-import { ApiThemoviedbService } from '../api-themoviedb.service';
+import { ApiThemoviedbService } from '../../services/api-themoviedb.service';
 // Routing
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';

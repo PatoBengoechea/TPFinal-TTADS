@@ -15,6 +15,6 @@ server.use(bodyParser.json()); // Permite entender peticiones del navegador (pas
 server.use(methodOverride());
 
 // Llamada a rutas
-server.use('/', routes);
+server.use('/api', routes);
 
 module.exports = server;
