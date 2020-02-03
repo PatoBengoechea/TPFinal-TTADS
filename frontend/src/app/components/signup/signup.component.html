@@ -3,65 +3,125 @@
     <div class="card border-dark">
       <h5 class="card-header">Sign Up</h5>
       <div class="card-body">
-        <form (submit)="signUp()">
+        <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
           <div class="form-group">
             <input
               class="form-control"
               type="text"
-              name="username"
-              [(ngModel)]="newUser.username"
+              formControlName="username"
               aria-describedby="usernameHelp"
               placeholder="Username"
               required
+              minlength="4"
+              maxlength="10"
               autofocus
             />
             <small id="usernameHelp" class="form-text text-muted">
-              Set the name you want us to call you
+              Must be between 4 and 10 caracters
             </small>
+            <!-- Error message -->
+            <div
+              *ngIf="username.invalid && (username.dirty || username.touched)"
+              class="alert alert-danger"
+            >
+              <div *ngIf="username.errors.required">
+                Username is required.
+              </div>
+              <div *ngIf="username.errors.minlength">
+                Username must be at least 4 characters long.
+              </div>
+            </div>
+            <!-- End error message -->
           </div>
           <div class="form-group">
             <input
               class="form-control"
               type="email"
-              name="email"
-              [(ngModel)]="newUser.email"
+              formControlName="email"
               aria-describedby="emailHelp"
               placeholder="Email address"
               required
             />
             <small id="emailHelp" class="form-text text-muted">
-              Example: meca@gmail.com
+              Example: ttads@gmail.com
             </small>
+            <!-- Error message -->
+            <div
+              *ngIf="email.invalid && (email.dirty || email.touched)"
+              class="alert alert-danger"
+            >
+              <div *ngIf="email.errors.required">
+                Email is required.
+              </div>
+              <div *ngIf="email.errors.email">
+                This is not a email.
+              </div>
+            </div>
+            <!-- End error message -->
           </div>
           <div class="form-group">
             <input
               class="form-control"
               type="password"
-              name="password"
-              [(ngModel)]="newUser.password"
+              formControlName="password"
               aria-describedby="passwordHelp"
               placeholder="Password"
               required
+              minlength="5"
+              maxlength="8"
             />
             <small id="passwordHelp" class="form-text text-muted">
               Must be between 5 and 8 caracters with letters and numbers
             </small>
+            <!-- Error message -->
+            <div
+              *ngIf="password.invalid && (password.dirty || password.touched)"
+              class="alert alert-danger"
+            >
+              <div *ngIf="password.errors.required">
+                Password is required.
+              </div>
+              <div *ngIf="password.errors.minlength">
+                Password must be at least 5 characters long.
+              </div>
+            </div>
+            <!-- End error message -->
           </div>
           <div class="form-group">
             <input
               class="form-control"
               type="password"
-              name="passwordCheck"
-              [(ngModel)]="newUser.passwordCheck"
-              aria-describedby="passwordCheckHelp"
-              placeholder="Password Check"
+              formControlName="confirmPassword"
+              placeholder="Re-enter password"
               required
+              minlength="5"
+              maxlength="8"
             />
-            <small id="passwordCheckHelp" class="form-text text-muted">
-              Password Check must be the same as Password
-            </small>
+            <!-- Error message -->
+            <div
+              *ngIf="
+                signUpForm.controls.confirmPassword.invalid &&
+                (signUpForm.controls.confirmPassword.dirty ||
+                  signUpForm.controls.confirmPassword.touched)
+              "
+              class="alert alert-danger mt-2"
+            >
+              <div *ngIf="signUpForm.controls.confirmPassword.errors.required">
+                PasswordCheck is required.
+              </div>
+              <div *ngIf="signUpForm.controls.confirmPassword.invalid">
+                Confirm password must be the same as password
+              </div>
+            </div>
+            <!-- End error message -->
           </div>
-          <button type="submit" class="btn btn-info btn-block">Register</button>
+          <button
+            type="submit"
+            [disabled]="!signUpForm.valid"
+            class="btn btn-info btn-block"
+          >
+            Register
+          </button>
         </form>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
+import { stringify } from 'querystring';
 
 @Component({
   selector: "app-signin",
@@ -9,6 +10,7 @@ import { Router } from "@angular/router";
 })
 export class SigninComponent implements OnInit {
   user = {};
+  errorMessage : string;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -23,7 +25,11 @@ export class SigninComponent implements OnInit {
         // Redireccionar a now playing movies
         this.router.navigate(["/now-playing"]);
       },
-      err => console.log(err)
+      err => {
+        // console.log(err);
+        this.errorMessage = err.error.message;
+        // this.router.navigate(["/signin"]);
+      }
     );
   }
 }
