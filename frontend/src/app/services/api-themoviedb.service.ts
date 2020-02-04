@@ -40,6 +40,12 @@ export class ApiThemoviedbService {
     return result;
   }
 
+  getAllFilms() {
+    let url = this.dominioURL + "/movie"
+    let options = { headers: this.headers}
+    return this.http.get(url, options)
+  }
+
   // Buscar detalles de una película
   getMovieDetails(id: number) {
     this.searchURL =

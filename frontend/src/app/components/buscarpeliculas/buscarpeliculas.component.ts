@@ -13,20 +13,33 @@ export class BuscarpeliculasComponent implements OnInit {
 
   private films: any = [];
   private filmDetails;
+  private allFilms = []
+  private filmsFiltered : any = []
   private imgurlbase = "https://image.tmdb.org/t/p/w185";
   @Output() lookDetails = new EventEmitter<any>();
 
   constructor(
     private service: ApiThemoviedbService,
     private router: Router
-  ) { }
+  ) { 
+    this.service.getAllFilms().subscribe((data: any) => { this.films = data.data.movies
+    this.allFilms = data.data.movies}
+    )
+  }
 
   ngOnInit() {
   }
 
   searchFilm(nameToSearch: string): void{
-    this.service.searchFilms(nameToSearch).subscribe((data: any) => this.films = data.data.movies);
-    //this.service.searchFilms(nameToSearch).subscribe((data: any) => console.log(data.results));
+    if (nameToSearch === "") {
+      this.films = this.allFilms
+    } else {
+      this.filmsFiltered = this.allFilms.filter(function (film) {
+        film.name.include
+        return film.name.toLowerCase().indexOf(nameToSearch.toLowerCase()) !== -1
+        })
+        this.films = this.filmsFiltered
+    }
   }
 
   search(id: number){
