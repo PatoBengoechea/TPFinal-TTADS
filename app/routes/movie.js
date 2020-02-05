@@ -112,7 +112,7 @@ router.post("/", (req, res, next) => {
         data: { result: "Pelicula guardada" },
         message: null
       });
-    })
+    })  
     .catch(err => {
       console.log(err);
       return res.json({

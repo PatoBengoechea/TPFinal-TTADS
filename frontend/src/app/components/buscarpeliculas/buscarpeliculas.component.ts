@@ -34,7 +34,7 @@ export class BuscarpeliculasComponent implements OnInit {
     if (nameToSearch === "") {
       this.films = this.allFilms
     } else {
-      this.filmsFiltered = this.allFilms.filter(function (film) {
+      this.filmsFiltered = this.films.filter(function (film) {
         film.name.include
         return film.name.toLowerCase().indexOf(nameToSearch.toLowerCase()) !== -1
         })
