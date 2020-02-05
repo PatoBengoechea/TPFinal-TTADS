@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { Router } = require("express");
 const router = Router();
+const colors = require("colors");
 
 var movie = require("../models/movie");
 
@@ -94,7 +95,7 @@ router.get("/:partialTitle", (req, res, next) => {
 });
 
 // Create movie
-router.post("/", (req, res, next) => {
+router.post("/", async (req, res, next) => {
   let mo = new movie({
     name: req.body.name,
     genre: req.body.genre,
@@ -104,9 +105,10 @@ router.post("/", (req, res, next) => {
     vote: req.body.vote
   });
 
-  mo.save()
+  await mo
+    .save()
     .then(doc => {
-      console.log(doc);
+      console.log(colors.blue(doc));
       return res.json({
         status: true,
         data: { result: "Pelicula guardada" },
@@ -115,7 +117,7 @@ router.post("/", (req, res, next) => {
     })
     .catch(err => {
       console.log(err);
-      return res.json({
+      return res.status(400).json({
         status: false,
         data: null,
         message: "Error al crear pelicula"
@@ -126,8 +128,8 @@ router.post("/", (req, res, next) => {
 });
 
 //Update movie (de otra forma)
-updateMovie = function(req, res) {
-  movie.findById(req.params.id, function(err, movieToUpdate) {
+updateMovie = async function(req, res) {
+  await movie.findById(req.params.id, function(err, movieToUpdate) {
     if (!err) {
       movieToUpdate.name = req.body.name;
       movieToUpdate.genre = req.body.genre;
@@ -135,7 +137,7 @@ updateMovie = function(req, res) {
       movieToUpdate.release_date = req.body.release_date;
     } else console.log("Ha ocurrido el siguiente eror: " + err);
   });
-  movie.save(function(err) {
+  await movie.save(function(err) {
     if (!err) {
       return res.json({
         status: true,
@@ -143,7 +145,7 @@ updateMovie = function(req, res) {
         message: null
       });
     } else {
-      return res.json({
+      return res.status().json({
         status: false,
         data: null,
         message: "Error al actualizar peliculas"
@@ -157,11 +159,11 @@ updateMovie = function(req, res) {
 router.put("/movie/:id", updateMovie);
 
 // Delete movie
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   let id = req.params.id;
-  movie.findByIdAndRemove(id);
+  await movie.findByIdAndRemove(id);
   res.status(200);
-  return res.json({
+  return res.status(404).json({
     status: false,
     data: null,
     message: "Error al obtener peliculas"
@@ -169,18 +171,19 @@ router.delete("/:id", (req, res, next) => {
 });
 
 // Votar una película
-router.put("/vote/:id", (req, res, next) => {
+router.put("/vote/:id", async (req, res, next) => {
   let id = req.params.id;
   if (req.body.vote) {
-    movie
+    await movie
       .findOneAndUpdate({ _id: ObjectId(id) }, { $inc: { vote: 1 } })
       .catch(err => {
-        res.status(400);
-        return res.json({
-          status: true,
-          data: null,
-          message: "Error al votar una pelicula"
-        });
+        if (!err) res.status(400);
+        else
+          return res.status(404).json({
+            status: true,
+            data: null,
+            message: "Error al votar una pelicula"
+          });
       });
   } else {
     movie

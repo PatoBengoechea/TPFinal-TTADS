@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
-import { stringify } from 'querystring';
 
 @Component({
   selector: "app-signin",
@@ -26,8 +25,11 @@ export class SigninComponent implements OnInit {
         this.router.navigate(["/now-playing"]);
       },
       err => {
-        // console.log(err);
+        console.log(err);
         this.errorMessage = err.error.message;
+        if(err.name === "HttpErrorResponse"){
+          console.log();
+        }
         // this.router.navigate(["/signin"]);
       }
     );
