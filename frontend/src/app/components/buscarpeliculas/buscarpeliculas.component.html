@@ -1,5 +1,5 @@
 <div class="jumbotron text-center">
-    <input  [(ngModel)]="nameToSearch" class="form-control mr-sm-2" type="search" placeholder="Search a film" aria-label="Search" autofocus>
+    <input (input)="searchFilm(nameToSearch)" [(ngModel)]="nameToSearch" class="form-control mr-sm-2" type="search" placeholder="Search a film" aria-label="Search" autofocus>
     <button (click)="searchFilm(nameToSearch)" class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
 </div>
 <div class="container">
