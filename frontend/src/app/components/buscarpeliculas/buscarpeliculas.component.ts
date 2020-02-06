@@ -3,6 +3,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApiThemoviedbService } from '../../services/api-themoviedb.service';
 //Routing
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from "ngx-spinner";
+
 
 @Component({
   selector: 'app-buscarpeliculas',
@@ -20,11 +22,14 @@ export class BuscarpeliculasComponent implements OnInit {
 
   constructor(
     private service: ApiThemoviedbService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) { 
+    this.spinner.show()
     this.service.getAllFilms().subscribe((data: any) => { this.films = data.data.movies
-    this.allFilms = data.data.movies}
-    )
+    this.allFilms = data.data.movies
+    this.spinner.hide()
+  })
   }
 
   ngOnInit() {

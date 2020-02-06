@@ -3,6 +3,7 @@ import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { passwordValidator } from "../../validations";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-signup",
@@ -19,7 +20,7 @@ export class SignupComponent implements OnInit {
   signUpForm: FormGroup;
 
   /* Methods */
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private spinner: NgxSpinnerService) {}
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
@@ -75,6 +76,7 @@ export class SignupComponent implements OnInit {
     this.newUser.password = this.signUpForm.controls.password.value;
     console.warn("Usuario a cargar", this.newUser);
     // Mandar usuario al backend
+    this.spinner.show()
     this.authService.signUp(this.newUser).subscribe(
       res => {
         console.log(res);
@@ -82,8 +84,12 @@ export class SignupComponent implements OnInit {
         localStorage.setItem("token", res.token);
         // Una vez creado el usuario enviarlo a la pagina de signIn para autenticarse
         this.router.navigate(["/signin"]);
+        this.spinner.hide()
       },
-      err => console.log(err)
+      err =>{ 
+        console.log(err)
+        this.spinner.hide()
+      } 
     );
   }
 }

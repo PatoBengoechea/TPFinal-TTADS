@@ -26,6 +26,7 @@
     "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
     "mongodb": "^3.3.5",
-    "mongoose": "^5.7.13"
+    "mongoose": "^5.7.13",
+    "ngx-spinner": "^8.1.0"
   }
 }

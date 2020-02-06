@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "../../node_modules/@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgxSpinnerModule } from "ngx-spinner";
 // import { MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule } from '@angular/material';
 
 // Service
@@ -45,7 +46,8 @@ import { SigninComponent } from "./components/signin/signin.component";
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxSpinnerModule
   ],
   providers: [
     ApiThemoviedbService, 
