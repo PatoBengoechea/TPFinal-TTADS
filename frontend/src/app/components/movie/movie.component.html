@@ -1,31 +1,22 @@
 <div *ngIf="movie">
   <div class="card shadow p-3 mb-3 rounded">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img
-          class="card-img"
-          href="image"
-          src="{{ movie.img_path }}"
-          alt="Poster de la película {{ movie.name }}"
-        />
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title text-center">{{ movie.name }}</h5>
-          <hr>
-          <p class="card-text">
-            <strong>Genero: </strong> {{ movie.genre }}
-          </p>
-          <p class="card-text">
-            <strong>Popularity: </strong> {{ movie.vote }}
-          </p>
-          <p class="card-text">
-            <strong>Release date: </strong> 
-          </p>
-          <hr>
-          <a href="#" class="stretched-link">Get Details</a>
-        </div>
-      </div>
+    <img
+      class="card-img"
+      style="height: 25%"
+      href="image"
+      src="{{ movie.img_path }}"
+      alt="Poster de la película {{ movie.name }}"
+    />
+    <div class="card-body">
+      <h5 class="card-title text-center">{{ movie.name }}</h5>
+      <hr />
+      <p class="card-text"><strong>Genero: </strong> {{ movie.genre }}</p>
+      <p class="card-text"><strong>Popularity: </strong> {{ movie.vote }}</p>
+      <p class="card-text">
+        <strong>Release date: </strong>
+      </p>
+      <hr />
+      <a href="#" class="stretched-link">Get Details</a>
     </div>
   </div>
 </div>

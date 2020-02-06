@@ -1,8 +1,39 @@
-<div class="container">
-  <input (input)="searchFilm(nameToSearch)" [(ngModel)]="nameToSearch" class="form-control d-block" type="search" placeholder="Search a film" aria-label="Search" autofocus>
-  <div *ngIf="films.length > 0" class="row">
-      <div class="row">
-        <app-movie *ngFor="let movie of films" [movie]="movie" class="col-4"></app-movie> 
-      </div>  
+<!-- Search -->
+<div class="container mt-2">
+  <div class="col-md-4 mx-auto">
+    <div class="form-group">
+      <input
+        (input)="searchFilm(nameToSearch)"
+        [(ngModel)]="nameToSearch"
+        class="form-control"
+        type="search"
+        placeholder="Search a film"
+        aria-label="Search"
+        autofocus
+      />
+    </div>
+  </div>
+</div>
+<!-- Movies -->
+<!-- <div class="container mt-2">
+  <div *ngIf="films.length > 0" class="col">
+    <div class="row">
+      <app-movie
+        *ngFor="let movie of films"
+        [movie]="movie"
+        class="col-4"
+        style="max-width: 25rem;"
+      ></app-movie>
+    </div>
+  </div>
+</div> -->
+
+<div class="container mt-2">
+  <div class="card-deck">
+    <app-movie
+      *ngFor="let movie of films"
+      [movie]="movie"
+      class="col-4"
+    ></app-movie>
   </div>
 </div>
