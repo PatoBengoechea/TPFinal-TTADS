@@ -9,6 +9,7 @@ import { PopularMoviesComponent } from "./components/popular-movies/popular-movi
 import { MovieDetailsComponent } from "./components/movie-details/movie-details.component";
 import { SigninComponent } from "./components/signin/signin.component";
 import { SignupComponent } from "./components/signup/signup.component";
+import { AddMovieComponent } from "./components/add-movie/add-movie.component";
 
 // Guard
 import { AuthGuard } from "./auth.guard";
@@ -37,7 +38,12 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: "signin", component: SigninComponent },
-  { path: "signup", component: SignupComponent }
+  { path: "signup", component: SignupComponent },
+  {
+    path: "addmovie",
+    component: AddMovieComponent,
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({

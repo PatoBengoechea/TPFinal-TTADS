@@ -15,8 +15,8 @@
   </button>
   <!-- Navbar content -->
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav mr-auto">
-      <!-- Links con routing -->
+    <!-- Routing izquierdo -->
+    <ul class="navbar-nav mr-auto">      
       <li class="nav-item">
         <a class="nav-link" routerLink="/home" routerLinkActive="active">
           Home
@@ -32,30 +32,36 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/now-playing" routerLinkActive="active"
-          >Now Playing</a
-        >
+        <a class="nav-link" routerLink="/now-playing" routerLinkActive="active">
+          Now Playing
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/popular" routerLinkActive="active"
-          >Popular</a
-        >
+        <a class="nav-link" routerLink="/popular" routerLinkActive="active">
+          Popular
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/addmovie" routerLinkActive="active">
+          Add
+        </a>
       </li>
     </ul>
+    <!-- Routing derecho -->    
     <ul class="navbar-nav ml-auto">
       <ng-container *ngIf="!authService.loggedIn(); else templateLogOut">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/signin" routerLinkActive="active"
-            >SignIn</a
-          >
+          <a class="nav-link" routerLink="/signin" routerLinkActive="active">
+            SignIn
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/signup" routerLinkActive="active"
-            >SignUp</a
-          >
+          <a class="nav-link" routerLink="/signup" routerLinkActive="active">
+            SignUp
+          </a>
         </li>
       </ng-container>
-      <!-- Templane a mostrar si el usuario esta logueado -->
+      <!-- Template a mostrar si el usuario esta logueado -->
       <ng-template #templateLogOut>
         <li class="nav-item">
           <a class="nav-link" style="cursor: pointer" (click)="this.authService.logOut()">LogOut</a>

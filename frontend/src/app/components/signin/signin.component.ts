@@ -10,31 +10,36 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class SigninComponent implements OnInit {
   user = {};
-  errorMessage : string;
+  errorMessage: string;
 
-  constructor(private authService: AuthService, private router: Router, private spinner: NgxSpinnerService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {}
 
   signIn() {
-    this.spinner.show()
+    this.spinner.show();
     this.authService.signIn(this.user).subscribe(
       res => {
         console.log(res);
         // Setear token en el localStorage
         localStorage.setItem("token", res.data.token);
-        // Redireccionar a now playing movies
+        // Redireccionar a nowPlaying
         this.router.navigate(["/now-playing"]);
-        this.spinner.hide()
+        this.spinner.hide();
       },
       err => {
         console.log(err);
-        this.errorMessage = err.error.message;
-        if(err.name === "HttpErrorResponse"){
-          console.log();
+        if (err.status !== 0) {
+          this.errorMessage = err.error.message;
         }
-        // this.router.navigate(["/signin"]);
-        this.spinner.hide()
+        if (err.status === 0) {
+          this.errorMessage = "Unable to connect with server";
+        }
+        this.spinner.hide();
       }
     );
   }

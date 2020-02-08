@@ -12,15 +12,20 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class SignupComponent implements OnInit {
   /* Variables */
-  newUser = {
+  private newUser = {
     username: "",
     email: "",
     password: ""
   };
-  signUpForm: FormGroup;
+  private signUpForm: FormGroup;
+  private errorMessage: string;
 
   /* Methods */
-  constructor(private authService: AuthService, private router: Router, private spinner: NgxSpinnerService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
@@ -67,7 +72,6 @@ export class SignupComponent implements OnInit {
   }
 
   signUp() {
-    // Probando formulario de angular
     console.warn(this.signUpForm.value);
     console.warn(this.signUpForm.status);
     // Cargar usuario
@@ -76,7 +80,7 @@ export class SignupComponent implements OnInit {
     this.newUser.password = this.signUpForm.controls.password.value;
     console.warn("Usuario a cargar", this.newUser);
     // Mandar usuario al backend
-    this.spinner.show()
+    this.spinner.show();
     this.authService.signUp(this.newUser).subscribe(
       res => {
         console.log(res);
@@ -84,12 +88,15 @@ export class SignupComponent implements OnInit {
         localStorage.setItem("token", res.token);
         // Una vez creado el usuario enviarlo a la pagina de signIn para autenticarse
         this.router.navigate(["/signin"]);
-        this.spinner.hide()
+        this.spinner.hide();
       },
-      err =>{ 
-        console.log(err)
-        this.spinner.hide()
-      } 
+      err => {
+        console.log(err);
+        if (err.status === 0) {
+          this.errorMessage = "Unable to connect with server";
+        }
+        this.spinner.hide();
+      }
     );
   }
 }

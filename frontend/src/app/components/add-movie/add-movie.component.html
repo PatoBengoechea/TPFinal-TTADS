@@ -1,0 +1,130 @@
+<div class="container mt-2">
+  <div class="card">
+    <h5 class="card-header text-center">Add a Movie</h5>
+    <div class="card-body">
+      <form
+        [formGroup]="addMovieForm"
+        (ngSubmit)="addMovie()"
+        class="needs-validation"
+        novalidate
+      >
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputMovieName">Name</label>
+            <input
+              type="text"
+              class="form-control "
+              formControlName="name"
+              placeholder="Enter a movie name"
+              autofocus
+              required
+            />
+            <!-- Valid message -->
+            <div *ngIf="name.valid && (name.dirty || name.touched)">
+              <span class="badge badge-success">Looks good!</span>
+            </div>
+            <!-- Error message -->
+            <div *ngIf="name.invalid && (name.dirty || name.touched)">
+              <small class="badge badge-danger">Name is required.</small>
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputMovieGenre">Genre</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="genre"
+              placeholder="Comedy, Terror, Psi-Fi, Drama, etc."
+              required
+            />
+            <!-- Valid message -->
+            <div *ngIf="genre.valid && (genre.dirty || genre.touched)">
+              <span class="badge badge-success">Looks good!</span>
+            </div>
+            <!-- Error message -->
+            <div *ngIf="genre.invalid && (genre.dirty || genre.touched)">
+              <small class="badge badge-danger">Genre is required.</small>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputMovieYear">Year</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="year"
+              placeholder="Year when it was released"
+              required
+            />
+            <!-- Valid message -->
+            <div *ngIf="year.valid && (year.dirty || year.touched)">
+              <span class="badge badge-success">Looks good!</span>
+            </div>
+            <!-- Error message -->
+            <div *ngIf="year.invalid && (year.dirty || year.touched)">
+              <small class="badge badge-danger">Genre is required.</small>
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputMovieReleaseDate">Release date</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="releaseDate"
+              placeholder="The date when it reached the big screen"
+            />
+            <small class="text-muted">No need to fill this.</small>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputMoviePoster">Poster</label>
+            <input
+              type="file"
+              class="form-control-file"
+              formControlName="poster"
+            />
+            <small class="text-muted">No need to fill this.</small>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="selectVote">Vote</label>
+            <select id="selectVote" class="form-control" formControlName="vote">
+              <option selected>...</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+            </select>
+            <small class="text-muted">No need to vote.</small>
+          </div>
+        </div>
+        <div class="form-group col-md-4 mx-auto">
+          <button
+            type="submit"
+            class="btn btn-info btn-block"
+            [disabled]="!addMovieForm.valid"
+          >
+            Add Movie
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="errorMessage" class="container text-center mt-2">
+    <div class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
+  </div>
+  <div *ngIf="validAdditionMsg" class="container text-center mt-2">
+    <div class="alert alert-success">
+      {{ validAdditionMsg }}
+    </div>
+  </div>
+</div>

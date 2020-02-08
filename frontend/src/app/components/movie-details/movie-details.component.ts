@@ -34,7 +34,8 @@ export class MovieDetailsComponent implements OnInit {
     //this.service.getMovieDetails(id).subscribe(data => console.log(data));
   }
 
-  rateMovie(vote: number): void{
+  // Out of order
+  /* rateMovie(vote: number): void{
     //const id = +this.route.snapshot.paramMap.get('id');
     //this.service.rateMovie(id, vote);
     this.service.rateMovie(this.movie.id, vote).subscribe( (response) => {
@@ -43,7 +44,7 @@ export class MovieDetailsComponent implements OnInit {
     (error) => {
       this.message = "Error, try later";
     });
-  }
+  } */
 
   // Method that navigates backward one step in the browser's history stack using the Location service.
   goBack(): void {

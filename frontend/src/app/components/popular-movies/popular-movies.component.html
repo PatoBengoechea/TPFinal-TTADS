@@ -3,15 +3,13 @@
 <div class="jumbotron text-center">
   <h1 class="display-4">Popular Movies</h1>
 </div>
-<!-- Fin Jumbotron-->
-<!-- Container -->
-<div class="container">
-  <!-- Componente de películas -->
-  <div *ngIf="popularMovies.length" class="row">
+<!-- Movies -->
+<div *ngIf="popularMovies.length" class="container mt-2">
+  <div class="card-deck">
     <app-movie
       *ngFor="let movie of popularMovies"
       [movie]="movie"
-      class="col-6"
+      class="col-4"
     ></app-movie>
   </div>
 </div>

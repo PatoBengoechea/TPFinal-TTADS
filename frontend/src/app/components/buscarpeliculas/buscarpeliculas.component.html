@@ -15,13 +15,23 @@
     </div>
   </div>
 </div>
-
-<div class="container mt-2">
+<!-- Movies -->
+<div *ngIf="films.length" class="container mt-2">
   <div class="card-deck">
     <app-movie
       *ngFor="let movie of films"
       [movie]="movie"
       class="col-4"
     ></app-movie>
+  </div>
+</div>
+<div *ngIf="!films.length" class="container text-center">
+  <div *ngIf="!films.length" class="alert alert-primary" role="alert">
+    No movies found!
+  </div>
+</div>
+<div *ngIf="errorMessage" class="container text-center">
+  <div class="alert alert-danger" role="alert">
+    {{errorMessage}}
   </div>
 </div>

@@ -7,7 +7,7 @@ var movie = require("../models/movie");
 
 var ObjectId = mongoose.Types.ObjectId;
 
-// Traer todas las películas`
+// Traer todas las películas
 router.get("/", (req, res, next) => {
   movie
     .find({})
@@ -71,25 +71,24 @@ router.get("/:partialTitle", (req, res, next) => {
     .populate("actors")
     .then(movies => {
       if (!movies) {
-        return res.json({
+        return res.status(404).json({
           status: false,
           data: null,
-          message: "No hay peliculas con ese ID"
+          message: "No hay peliculas con ese nombre"
         });
       }
-      return res.json({
+      return res.status(200).json({
         status: true,
-        data: { movies: movies },
+        data: { movies },
         message: null
       });
     })
     .catch(err => {
-      console.log(err => {
-        return res.json({
-          status: false,
-          data: null,
-          message: "Error al obtener peliculas"
-        });
+      console.log(colors.red(err));
+      return res.json({
+        status: false,
+        data: null,
+        message: "Error al obtener peliculas"
       });
     });
 });
@@ -114,7 +113,7 @@ router.post("/", async (req, res, next) => {
         data: { result: "Pelicula guardada" },
         message: null
       });
-    })  
+    })
     .catch(err => {
       console.log(err);
       return res.status(400).json({
@@ -211,7 +210,7 @@ router.put("/vote/:id", async (req, res, next) => {
 });
 
 // Traer populares
-router.get("/movie/popular", (req, res, next) => {
+router.get("/popular", (req, res, next) => {
   movie
     .find({ vote: { $gte: 10 } })
     .then(movies => {
@@ -241,7 +240,7 @@ router.get("/movie/popular", (req, res, next) => {
 });
 
 // Traer now-playing
-router.get("/movie/now-playing", (req, res, next) => {
+router.get("/now-playing", (req, res, next) => {
   let date2 = new Date();
   date2.setMonth(date2.getMonth() - 1);
   movie
