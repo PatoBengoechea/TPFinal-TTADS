@@ -14,7 +14,7 @@ export class AddMovieComponent implements OnInit {
     name: "",
     genre: "",
     year: "",
-    releaseDate: "",
+    release_date: "",
     img_path: "",
     vote: ""
   };
@@ -44,7 +44,7 @@ export class AddMovieComponent implements OnInit {
       name: new FormControl(this.newMovie.name, Validators.required),
       genre: new FormControl(this.newMovie.genre, Validators.required),
       year: new FormControl(this.newMovie.year, Validators.required),
-      releaseDate: new FormControl(this.newMovie.releaseDate),
+      releaseDate: new FormControl(this.newMovie.release_date),
       poster: new FormControl(this.newMovie.img_path),
       vote: new FormControl(this.newMovie.vote)
     });
@@ -59,9 +59,9 @@ export class AddMovieComponent implements OnInit {
     this.newMovie.genre = this.addMovieForm.controls.genre.value;
     this.newMovie.year = this.addMovieForm.controls.year.value;
     if (this.addMovieForm.controls.releaseDate.value === "")
-      this.newMovie.releaseDate = null;
+      this.newMovie.release_date = null;
     else
-      this.newMovie.releaseDate = this.addMovieForm.controls.releaseDate.value;
+      this.newMovie.release_date = this.addMovieForm.controls.releaseDate.value;
     if (this.addMovieForm.controls.poster.value === "")
       this.newMovie.img_path = null;
     else this.newMovie.img_path = this.addMovieForm.controls.poster.value;
@@ -87,6 +87,7 @@ export class AddMovieComponent implements OnInit {
         if (err.status === 0) {
           this.errorMessage = "Unable to connect with server";
         }
+        else this.errorMessage = err.error.message;
         this.spinner.hide();
       }
     );
