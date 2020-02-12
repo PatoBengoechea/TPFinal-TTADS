@@ -16,7 +16,9 @@ export class MovieComponent implements OnInit {
 
   ngOnInit() {}
 
-  search(id: number) {
-    this.route.navigate(["movie-details", id]);
+  goToDetails(movie: any) {
+    console.log(movie._id)
+    this.route.navigate(["movie-details", movie._id]);
   }
+
 }

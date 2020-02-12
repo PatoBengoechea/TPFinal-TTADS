@@ -1,5 +1,5 @@
 <div *ngIf="movie">
-  <div class="card shadow p-3 mb-3 rounded">
+  <div class="card shadow p-3 mb-3 rounded" (click)="goToDetails(movie)">
     <img
       class="card-img"
       style="height: 25%"
@@ -13,10 +13,6 @@
       <p class="card-text"><strong>Genero: </strong> {{ movie.genre }}</p>
       <p class="card-text"><strong>Popularity: </strong> {{ movie.vote }}</p>
       <p class="card-text"><strong>Release date: </strong></p>
-      <hr />
-      <p class="text-center">
-        <a href="#" class="stretched-link">Get Details</a>
-      </p>
     </div>
   </div>
 </div>

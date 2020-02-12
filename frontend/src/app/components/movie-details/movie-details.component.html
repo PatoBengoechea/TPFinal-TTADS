@@ -5,19 +5,19 @@
       <img
         class="img-fluid img-thumbnail"
         src="{{ imgBaseURL + imgPosterSize + movie.poster_path }}"
-        alt="Poster de la película {{ movie.title }}"
+        alt="Poster de la película {{ movie.name }}"
       />
     </div>
     <div class="col-8">
-      <h1 class="display-4">{{ movie.title }}</h1>
+      <h1 class="display-4">{{ movie.name }}</h1>
       <p class="lead">
         <strong>Release Date: </strong>{{ movie.release_date }}
       </p>
       <p class="card-text" style="text-align: justify">
-        <strong>Overview: </strong>{{ movie.overview }}
+        <strong>genre: </strong>{{ movie.genre }}
       </p>
       <p class="card-text">
-        <strong>Original Title: </strong>{{ movie.original_title }}
+        <strong>year: </strong>{{ movie.year }}
       </p>
       <p class="card-text">
         <strong>Original Language: </strong>{{ movie.original_language }}

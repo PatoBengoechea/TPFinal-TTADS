@@ -24,9 +24,9 @@ export class ApiThemoviedbService {
   }
 
   // Buscar detalles de una película
-  getMovieDetails(id: number) {
+  getMovieDetails(id: string) {
     this.searchURL =
-      this.dominioURL + "/movie/" + id + "?";
+      this.dominioURL + "/unique/" + id + "?";
     return this.http.get(this.searchURL);
   }
 
