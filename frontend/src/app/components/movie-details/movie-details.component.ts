@@ -13,9 +13,9 @@ import { Location } from '@angular/common';
 export class MovieDetailsComponent implements OnInit {
 
   @Input() movie: any = {};
-  private imgBaseURL = "https://image.tmdb.org/t/p/";
-  private imgPosterSize = "w780";
-  private message;
+  private monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
   constructor(
     private service: ApiThemoviedbService,
@@ -29,24 +29,12 @@ export class MovieDetailsComponent implements OnInit {
 
   getMovieDetails(): void {
     var id = this.route.snapshot.paramMap.get('query')
-    this.service.getMovieDetails(id).subscribe(data => { this.movie = data.data.movies[0]
+    this.service.getMovieDetails(id).subscribe((data: any) => { this.movie = data.data.movies[0]
+      let date = new Date(this.movie.release_date)
+      this.movie.parsedDate = this.monthNames[date.getMonth()] + " " + date.getDay() + ", " + date.getFullYear()
     });
-    //this.service.getMovieDetails(id).subscribe(data => console.log(data));
   }
 
-  // Out of order
-  /* rateMovie(vote: number): void{
-    //const id = +this.route.snapshot.paramMap.get('id');
-    //this.service.rateMovie(id, vote);
-    this.service.rateMovie(this.movie.id, vote).subscribe( (response) => {
-      this.message = "Thanks for voting";
-    }, 
-    (error) => {
-      this.message = "Error, try later";
-    });
-  } */
-
-  // Method that navigates backward one step in the browser's history stack using the Location service.
   goBack(): void {
     this.location.back();
   }
