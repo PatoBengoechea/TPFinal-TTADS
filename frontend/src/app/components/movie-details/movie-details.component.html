@@ -40,94 +40,14 @@
         </button>
         <div id="votos" class="collapse btn-group">
           <button
+          *ngFor="let i of vote"
             type="button"
             class="btn btn-secondary"
-            (click)="rateMovie(1)"
+            (click)="rateMovie(i)"
             data-toggle="modal"
             data-target="#exampleModal"
           >
-            1
-          </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="rateMovie(2)"
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >
-            2
-          </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="rateMovie(3)"
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >
-            3
-          </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="rateMovie(4)"
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >
-            4
-          </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="rateMovie(5)"
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >
-            5
-          </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="rateMovie(6)"
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >
-            6
-          </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="rateMovie(7)"
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >
-            7
-          </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="rateMovie(8)"
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >
-            8
-          </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="rateMovie(9)"
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >
-            9
-          </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="rateMovie(10)"
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >
-            10
+            {{vote[i]}}
           </button>
         </div>
 
