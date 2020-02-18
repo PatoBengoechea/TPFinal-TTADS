@@ -32,13 +32,13 @@ export class ApiThemoviedbService {
 
   // Buscar películas en cartelera
   searchNowPlayingMovies() {
-    this.searchURL = this.dominioURL + "/now-playing";
+    this.searchURL = this.dominioURL + "/movie/now-playing";
     return this.http.get(this.searchURL);
   }
 
   // Buscar películas populares
   searchPopularMovies() {
-    this.searchURL = this.dominioURL + "/popular";
+    this.searchURL = this.dominioURL + "/movie/popular";
     return this.http.get(this.searchURL);
   }
 

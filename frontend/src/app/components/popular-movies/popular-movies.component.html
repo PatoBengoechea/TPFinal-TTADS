@@ -13,3 +13,13 @@
     ></app-movie>
   </div>
 </div>
+<div *ngIf="!popularMovies.length" class="container text-center">
+  <div *ngIf="!popularMovies.length" class="alert alert-primary" role="alert">
+    No Popular Movies Found!
+  </div>
+</div>
+<div *ngIf="errorMessage" class="container text-center">
+  <div class="alert alert-danger" role="alert">
+    {{errorMessage}}
+  </div>
+</div>

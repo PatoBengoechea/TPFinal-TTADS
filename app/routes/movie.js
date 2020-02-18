@@ -210,14 +210,14 @@ router.put("/vote/:id", async (req, res, next) => {
 });
 
 // Traer populares
-router.get("/popular", (req, res, next) => {
+router.get("/movie/popular", (req, res, next) => {
   movie
-    .find({ vote: { $gte: 10 } })
+    .find({ vote: { $gte: 6 } })
     .then(movies => {
       if (!movies) {
-        res.status(200);
+        res.status(400);
         return res.json({
-          status: true,
+          status: false,
           data: null,
           message: "No hay peliculas populares disponibles"
         });
@@ -240,8 +240,9 @@ router.get("/popular", (req, res, next) => {
 });
 
 // Traer now-playing
-router.get("/now-playing", (req, res, next) => {
+router.get("/movie/now-playing", (req, res, next) => {
   let date2 = new Date();
+
   date2.setMonth(date2.getMonth() - 1);
   movie
     .find({ release_date: { $gte: date2 } })
