@@ -27,6 +27,7 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
 import { SignupComponent } from "./components/signup/signup.component";
 import { SigninComponent } from "./components/signin/signin.component";
 import { AddMovieComponent } from './components/add-movie/add-movie.component';
+import { ActorComponent } from './components/actor/actor.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AddMovieComponent } from './components/add-movie/add-movie.component';
     NavbarComponent,
     SignupComponent,
     SigninComponent,
-    AddMovieComponent
+    AddMovieComponent,
+    ActorComponent
   ],
   imports: [
     BrowserModule,

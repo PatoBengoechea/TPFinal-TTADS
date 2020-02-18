@@ -39,4 +39,10 @@ export class MovieDetailsComponent implements OnInit {
     this.location.back();
   }
 
+  rateMovie(rate): void {
+    this.service.rateMovie(this.movie._id, rate).subscribe((data:any) => {
+      console.log(data)
+    })
+  }
+
 }

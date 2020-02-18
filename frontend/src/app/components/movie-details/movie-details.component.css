@@ -1,0 +1,6 @@
+.actor {
+    transition: all .4s ease-in-out;
+}
+.actor:hover {
+    transform: scale(1.1);
+}
