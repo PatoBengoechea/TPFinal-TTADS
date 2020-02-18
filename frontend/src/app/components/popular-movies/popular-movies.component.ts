@@ -10,21 +10,22 @@ import { NgxSpinnerService } from "ngx-spinner";
 export class PopularMoviesComponent implements OnInit {
   private popularMovies: any = [];
 
-  constructor(private service: ApiThemoviedbService, private spinner: NgxSpinnerService) {}
+  constructor(
+    private service: ApiThemoviedbService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {
     this.searchpopularMovies();
   }
 
   searchpopularMovies(): void {
-    this.spinner.show()
-    this.service
-      .searchPopularMovies()
-      .subscribe(
-        (response: any) => { (this.popularMovies = response.data.movies)
-          this.spinner.hide()
-        }
-      );
+    this.spinner.show();
+    this.service.searchPopularMovies().subscribe((response: any) => {
+      console.warn(response);
+      this.popularMovies = response.data.movies;
+      this.spinner.hide();
+    });
     //this.service.searchPopularMovies().subscribe((response:any)=> console.log(response.results));
   }
 }

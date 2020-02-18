@@ -72,7 +72,7 @@
               type="text"
               class="form-control"
               formControlName="releaseDate"
-              placeholder="The date when it reached the big screen"
+              placeholder="Ex: 2020-02-01"
             />
             <small class="text-muted">No need to fill this.</small>
           </div>
@@ -84,6 +84,7 @@
               type="file"
               class="form-control-file"
               formControlName="poster"
+              (change)="onFileChanged($event)"
             />
             <small class="text-muted">No need to fill this.</small>
           </div>

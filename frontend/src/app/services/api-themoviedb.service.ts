@@ -47,6 +47,15 @@ export class ApiThemoviedbService {
     return this.http.post<any>(this.dominioURL, movie);
   }
 
+  // Load movie poster
+  loadMovieImg(formData: FormData) {
+    this.searchURL = this.dominioURL + "/load-movie";
+    return this.http.post(this.searchURL, formData, {
+      reportProgress: true,
+      observe: "events"
+    });
+  }
+
   //Votar una película
   // Adaptarlo a nuestro tp
   rateMovie(id: number, vote: number) {
