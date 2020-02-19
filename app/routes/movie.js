@@ -5,6 +5,7 @@ const colors = require("colors");
 const path = require("path");
 
 var movie = require("../models/movie");
+const verifyToken = require("../utilities/validateToken");
 
 var ObjectId = mongoose.Types.ObjectId;
 
@@ -132,30 +133,6 @@ router.post("/", async (req, res, next) => {
   next();
 });
 
-// Load movie image
-router.post("/load-movie", (req, res, next) => {
-  const posterName = req.files.poster.name;
-  const posetrPath = path.join(
-    "D:/UTNElectivas/TTADS/Repos TTADS/TPFinal-TTADS/app/img",
-    posterName
-  );
-
-  // image not defined
-  image.mv(posetrPath, err => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({
-        status: "error",
-        message: err
-      });
-    }
-    return res.status(200).json({
-      status: "success",
-      message: "Poster loaded on: " + posetrPath
-    });
-  });
-});
-
 //Update movie (de otra forma)
 updateMovie = async function(req, res) {
   await movie.findById(req.params.id, function(err, movieToUpdate) {
@@ -200,38 +177,36 @@ router.delete("/:id", async (req, res, next) => {
 });
 
 // Votar una película
-router.post("/vote/:id", async (req, res, next) => {
+router.post("/movie/vote/:id", async (req, res, next) => {
   let id = req.params.id;
   if (req.body.vote) {
     await movie
       .updateOne({ _id: ObjectId(id) }, { $inc: { vote: req.body.vote } })
       .catch(err => {
-        if (!err) res.status(400);
-        else
+        if (err)
           return res.status(404).json({
             status: true,
             data: null,
-            message: "Error al votar una pelicula"
+            message:
+              "Error al votar una pelicula. No se ha encontrado la pelicula"
           });
       });
   } else {
     movie
       .updateOne({ _id: ObjectId(id) }, { $inc: { vote: -1 } })
       .then(result => {
-        res.status(200);
-        return res.json({
+        return res.status(200).json({
           status: true,
-          data: { result: "Votacion aceptada" },
-          message: null
+          data: null,
+          message: "Votacion aceptada"
         });
       })
       .catch(err => {
         console.log(err);
-        res.status(400);
-        return res.json({
+        return res.status(400).json({
           status: false,
           data: null,
-          message: "Error al votar una pelicula"
+          message: "Error al votar la pelicula"
         });
       });
   }
@@ -245,7 +220,7 @@ router.get("/movie/popular", (req, res, next) => {
     .find({ vote: { $gte: 6 } })
     .then(movies => {
       if (!movies) {
-        return res.status(400).json({
+        return res.status(404).json({
           status: false,
           data: null,
           message: "No hay peliculas populares disponibles"

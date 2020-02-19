@@ -47,8 +47,7 @@ export class AddMovieComponent implements OnInit {
       genre: new FormControl(this.newMovie.genre, Validators.required),
       year: new FormControl(this.newMovie.year, Validators.required),
       releaseDate: new FormControl(this.newMovie.release_date),
-      poster: new FormControl(this.newMovie.img_path),
-      vote: new FormControl(this.newMovie.vote)
+      poster: new FormControl(this.newMovie.img_path)
     });
   }
 
@@ -67,17 +66,12 @@ export class AddMovieComponent implements OnInit {
     this.newMovie.year = this.addMovieForm.controls.year.value;
     if (this.addMovieForm.controls.releaseDate.value !== "")
       this.newMovie.release_date = this.addMovieForm.controls.releaseDate.value;
-    if (
-      this.addMovieForm.controls.vote.value !== "..." &&
-      this.addMovieForm.controls.vote.value !== ""
-    )
-      this.newMovie.vote = this.addMovieForm.controls.vote.value;
     if (this.posterFile !== null) this.newMovie.img_path = this.posterFile.name;
 
     console.warn("Pelicula a cargar", this.newMovie);
 
     // Mandar pelicula al backend
-    
+
     this.spinner.show();
     this.movieService.createMovie(this.newMovie).subscribe(
       res => {

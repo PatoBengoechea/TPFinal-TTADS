@@ -11,8 +11,7 @@ export class ApiThemoviedbService {
   constructor(private http: HttpClient) {}
 
   getAllFilms() {
-    let url = this.dominioURL;
-    return this.http.get(url);
+    return this.http.get(this.dominioURL);
   }
 
   // Buscar películas por nombre
@@ -57,7 +56,6 @@ export class ApiThemoviedbService {
   }
 
   //Votar una película
-  // Adaptarlo a nuestro tp
   rateMovie(id: number, vote: number) {
     let body_rate: any = {};
     body_rate.vote = vote

@@ -13,6 +13,7 @@
     ></app-movie>
   </div>
 </div>
+<!-- Alert messages -->
 <div *ngIf="!popularMovies.length" class="container text-center">
   <div *ngIf="!popularMovies.length" class="alert alert-primary" role="alert">
     No Popular Movies Found!
@@ -20,6 +21,6 @@
 </div>
 <div *ngIf="errorMessage" class="container text-center">
   <div class="alert alert-danger" role="alert">
-    {{errorMessage}}
+    {{ errorMessage }}
   </div>
 </div>

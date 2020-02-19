@@ -35,9 +35,9 @@ export class BuscarpeliculasComponent implements OnInit {
       },
       err => {
         console.log(err);
-        if (err.status === 0) {
+        if (err.status !== 0) this.errorMessage = err.error.message;
+        if (err.status === 0)
           this.errorMessage = "Unable to connect with server";
-        }
         this.spinner.hide();
       }
     );

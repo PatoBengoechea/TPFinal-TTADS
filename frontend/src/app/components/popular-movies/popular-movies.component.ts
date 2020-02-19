@@ -9,6 +9,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class PopularMoviesComponent implements OnInit {
   private popularMovies: any = [];
+  private errorMessage: string;
 
   constructor(
     private service: ApiThemoviedbService,
@@ -21,11 +22,19 @@ export class PopularMoviesComponent implements OnInit {
 
   searchpopularMovies(): void {
     this.spinner.show();
-    this.service.searchPopularMovies().subscribe((response: any) => {
-      console.warn(response);
-      this.popularMovies = response.data.movies;
-      this.spinner.hide();
-    });
-    //this.service.searchPopularMovies().subscribe((response:any)=> console.log(response.results));
+    this.service.searchPopularMovies().subscribe(
+      (response: any) => {
+        console.log(response);
+        this.popularMovies = response.data.movies;
+        this.spinner.hide();
+      },
+      err => {
+        console.log(err);
+        if (err.status !== 0) this.errorMessage = err.error.message;
+        if (err.status === 0)
+          this.errorMessage = "Unable to connect with server";
+        this.spinner.hide();
+      }
+    );
   }
 }

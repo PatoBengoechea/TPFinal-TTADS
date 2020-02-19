@@ -10,8 +10,12 @@ import { NgxSpinnerService } from "ngx-spinner";
 export class NowPlayingMoviesComponent implements OnInit {
   private nowPlayingMovies: any = [];
   private dateToday: string;
+  private errorMessage: string;
 
-  constructor(private service: ApiThemoviedbService, private spinner: NgxSpinnerService) {}
+  constructor(
+    private service: ApiThemoviedbService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {
     let f = new Date();
@@ -21,17 +25,19 @@ export class NowPlayingMoviesComponent implements OnInit {
   }
 
   searchNowPlayingMovies(): void {
-
-    this.spinner.show()
-    this.service
-      .searchNowPlayingMovies()
-      .subscribe((data: any) => {(this.nowPlayingMovies = data.data.movies)
-       this.spinner.hide() 
-        
-      });
-
-  
-    //console.log(this.service);
-    //console.log(this.nowPlayingMovies);
+    this.spinner.show();
+    this.service.searchNowPlayingMovies().subscribe(
+      (response: any) => {
+        this.nowPlayingMovies = response.data.movies;
+        this.spinner.hide();
+      },
+      err => {
+        console.log(err);
+        if (err.status !== 0) this.errorMessage = err.error.message;
+        if (err.status === 0)
+          this.errorMessage = "Unable to connect with server";
+        this.spinner.hide();
+      }
+    );
   }
 }
