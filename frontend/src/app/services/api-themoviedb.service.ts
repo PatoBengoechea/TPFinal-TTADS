@@ -60,18 +60,8 @@ export class ApiThemoviedbService {
   // Adaptarlo a nuestro tp
   rateMovie(id: number, vote: number) {
     let body_rate: any = {};
-
-    // Rate the movie (con guest_sesion_id)
-    // https://api.themoviedb.org/3/movie/{movie_id}/rating?api_key=afbc1995a41f72f35622f748d82068dc&guest_session_id=<<guest_session_id>>
-    /* body_rate.value = vote;
-    this.searchURL =
-      this.dominioURL +
-      "/movie/" +
-      id +
-      "/rating?" +
-      this.apiKey +
-      "&guest_session_id=" +
-      this.guest_session.guest_session_id;
-    return this.http.post(this.searchURL, body_rate); */
+    body_rate.vote = vote
+    let url = this.searchURL = this.dominioURL + "/movie/vote/" + id
+    return this.http.post(url, body_rate)
   }
 }

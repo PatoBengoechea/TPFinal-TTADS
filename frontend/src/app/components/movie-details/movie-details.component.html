@@ -30,7 +30,6 @@
         <p class="card-text">
           <strong>Vote Count: </strong>{{ movie.vote }}
         </p>
-        <button class="btn btn-info mr-5" (click)="goBack()">Go Back</button>
         <button
           data-toggle="collapse"
           data-target="#votos"
@@ -81,4 +80,7 @@
       </div>
     </div>
   </div>
+</div>
+<div class="container card-group">
+  <app-actor *ngFor="let actor of movie.actors" class="col-4 actor" [actor]="actor"> </app-actor>
 </div>
