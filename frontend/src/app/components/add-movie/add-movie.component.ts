@@ -8,6 +8,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 import { viewClassName } from '@angular/compiler';
+import {DpDatePickerModule} from 'ng2-date-picker';
 
 @Component({
   selector: "app-add-movie",

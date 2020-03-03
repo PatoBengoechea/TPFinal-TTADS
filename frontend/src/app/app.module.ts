@@ -31,6 +31,7 @@ import { SignupComponent } from "./components/signup/signup.component";
 import { SigninComponent } from "./components/signin/signin.component";
 import { AddMovieComponent } from './components/add-movie/add-movie.component';
 import { ActorComponent } from './components/actor/actor.component';
+import { DpDatePickerModule } from 'ng2-date-picker';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ActorComponent } from './components/actor/actor.component';
     BrowserAnimationsModule,
     NgxSpinnerModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    DpDatePickerModule
   ],
   providers: [
     ApiThemoviedbService, 
