@@ -4,7 +4,10 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "../../node_modules/@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxSpinnerModule } from "ngx-spinner";
-// import { MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule } from '@angular/material';
+import { environment } from "../environments/environment"
+import { AngularFireModule} from "@angular/fire"
+import { AngularFireStorageModule} from '@angular/fire/storage'
+ // import { MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule } from '@angular/material';
 
 // Service
 import { ApiThemoviedbService } from "./services/api-themoviedb.service";
@@ -51,7 +54,9 @@ import { ActorComponent } from './components/actor/actor.component';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule
   ],
   providers: [
     ApiThemoviedbService, 

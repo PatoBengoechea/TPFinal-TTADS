@@ -1,9 +1,13 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ApiThemoviedbService } from "../../services/api-themoviedb.service";
 import { Router } from "@angular/router";
 import { HttpEventType } from "@angular/common/http";
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable';
+import { viewClassName } from '@angular/compiler';
 
 @Component({
   selector: "app-add-movie",
@@ -20,15 +24,21 @@ export class AddMovieComponent implements OnInit {
     vote: null
   };
 
+
+  @ViewChild('imageFilm', { static: false}) inputImageFilm: ElementRef;
   private addMovieForm: FormGroup;
   private errorMessage: string;
   private validAdditionMsg: string;
   private posterFile: File = null;
 
+  uploadPercent: Observable<number>;
+  urlImage: Observable<String>;
+
   constructor(
     private movieService: ApiThemoviedbService,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private storage: AngularFireStorage
   ) {}
 
   get name() {
@@ -53,7 +63,16 @@ export class AddMovieComponent implements OnInit {
 
   // Metodo que captura los datos de la imagen
   onFileChanged(event) {
+    const id = Math.random().toString(36).substring(2);
     this.posterFile = <File>event.target.files[0];
+    const file = event.target.files[0]
+    const filePath = id
+    const ref = this.storage.ref(filePath)
+    const task = this.storage.upload(filePath, file)
+
+    this.uploadPercent = task.percentageChanges();
+    task.snapshotChanges().pipe(finalize(() => this.urlImage = ref.getDownloadURL())).subscribe();
+
   }
 
   addMovie() {
@@ -66,7 +85,7 @@ export class AddMovieComponent implements OnInit {
     this.newMovie.year = this.addMovieForm.controls.year.value;
     if (this.addMovieForm.controls.releaseDate.value !== "")
       this.newMovie.release_date = this.addMovieForm.controls.releaseDate.value;
-    if (this.posterFile !== null) this.newMovie.img_path = this.posterFile.name;
+    if (this.posterFile !== null) this.newMovie.img_path = this.inputImageFilm.nativeElement.value
 
     console.warn("Pelicula a cargar", this.newMovie);
 
