@@ -27,18 +27,17 @@ export class SigninComponent implements OnInit {
         console.log(res);
         // Setear token en el localStorage
         localStorage.setItem("token", res.data.token);
-        // Redireccionar a nowPlaying
-        this.router.navigate(["/now-playing"]);
+        // Redireccionar
+        this.router.navigate(["/search-movies"]);
         this.spinner.hide();
       },
       err => {
         console.log(err);
-        if (err.status !== 0) {
-          this.errorMessage = err.error.message;
-        }
-        if (err.status === 0) {
+        if (err.status !== 0) this.errorMessage = err.error.message;
+
+        if (err.status === 0)
           this.errorMessage = "Unable to connect with server";
-        }
+
         this.spinner.hide();
       }
     );

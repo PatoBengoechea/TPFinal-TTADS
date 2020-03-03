@@ -1,6 +1,6 @@
 <ngx-spinner></ngx-spinner>
-  <div class="jumbotron jumbotron-fluid width">
-    <div class="container">
+<div class="jumbotron jumbotron-fluid width">
+  <div class="container">
     <div class="row">
       <div class="col-4">
         <img
@@ -14,23 +14,7 @@
         <p class="lead">
           <strong>Release Date: </strong>{{ movie.parsedDate }}
         </p>
-        <p class="card-text" style="text-align: justify">
-          <strong>Genre: </strong>{{ movie.genre }}
-        </p>
-        <p class="card-text">
-          <strong>Original Language: </strong>{{ movie.original_language }}
-        </p>
-        <p class="card-text"><strong>Genres:</strong></p>
-        <ul *ngFor="let g of movie.genres">
-          <li>{{ g.name }}</li>
-        </ul>
-        <p class="card-text">
-          <strong>Popularity: </strong>{{ movie.popularity }}
-        </p>
-        <p class="card-text">
-          <strong>Vote Count: </strong>{{ movie.vote }}
-        </p>
-        <button class="btn btn-info mr-5" (click)="goBack()">Go Back</button>
+        <p class="card-text"><strong>Vote Count: </strong>{{ movie.vote }}</p>
         <button
           data-toggle="collapse"
           data-target="#votos"
@@ -40,45 +24,35 @@
         </button>
         <div id="votos" class="collapse btn-group">
           <button
-          *ngFor="let i of vote"
+            *ngFor="let i of vote"
             type="button"
             class="btn btn-secondary"
             (click)="rateMovie(i)"
             data-toggle="modal"
             data-target="#exampleModal"
           >
-            {{vote[i]}}
+            {{ vote[i] }}
           </button>
         </div>
-
-        <!-- Modal -->
-        <div
-          class="modal fade"
-          id="exampleModal"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-body">
-                <p>{{ this.message }}</p>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Fin Modal -->
+        <hr>
+        <button class="btn btn-info" (click)="goBack()">
+          Go Back
+        </button>
       </div>
     </div>
+  </div>
+</div>
+<!-- Actors -->
+<div class="container">
+  <h5 class="card-header">
+    Actors
+  </h5>
+  <div class="container card-group mx-auto">
+    <app-actor
+      *ngFor="let actor of movie.actors"
+      class="col-4 actor"
+      [actor]="actor"
+    >
+    </app-actor>
   </div>
 </div>

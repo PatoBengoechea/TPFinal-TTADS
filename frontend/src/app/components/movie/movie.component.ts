@@ -8,17 +8,37 @@ import { ActivatedRoute, Router } from "@angular/router";
   styleUrls: ["./movie.component.css"]
 })
 export class MovieComponent implements OnInit {
-  @Input() movie;
-  // private imgBaseURL = "https://image.tmdb.org/t/p/";
-  // private imgPosterSize = "w780";
+  @Input() movie: any;
+
+  private monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
 
   constructor(private route: Router) {}
 
-  ngOnInit() {}
-
-  goToDetails(movie: any) {
-    console.log(movie._id)
-    this.route.navigate(["movie-details", movie._id]);
+  ngOnInit() {
+    let date = new Date(this.movie.release_date);
+    this.movie.parsedDate =
+      this.monthNames[date.getMonth()] +
+      " " +
+      date.getDay() +
+      ", " +
+      date.getFullYear();
   }
 
+  goToDetails(movie: any) {
+    // console.log(movie._id);
+    this.route.navigate(["movie-details", movie._id]);
+  }
 }

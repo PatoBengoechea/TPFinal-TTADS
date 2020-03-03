@@ -16,3 +16,14 @@
     ></app-movie>
   </div>
 </div>
+<!-- Alert messages -->
+<div *ngIf="!nowPlayingMovies.length" class="container text-center">
+  <div *ngIf="!nowPlayingMovies.length" class="alert alert-primary" role="alert">
+    No Movies Found!
+  </div>
+</div>
+<div *ngIf="errorMessage" class="container text-center">
+  <div class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+</div>

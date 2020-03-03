@@ -12,10 +12,5 @@ function init() {
             console.log(colors.green("Server on port", port));
     });
 }
-/* 
-async function init2(){
-    await server.listen(port);
-    console.log(colors.green("Server on port", port));
-}
- */
+
 init();
