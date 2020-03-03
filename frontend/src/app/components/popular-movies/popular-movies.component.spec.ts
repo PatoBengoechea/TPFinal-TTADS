@@ -19,7 +19,14 @@ describe('popularMoviesComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+/*   it('should create', () => {
     expect(component).toBeTruthy();
+  }); */
+
+  it('should see que onda', () => {
+    //const fixturee = TestBed.createComponent(HomeComponent);
+   // fixture.detectChanges();
+   (component.searchpopularMovies())
   });
+
 });

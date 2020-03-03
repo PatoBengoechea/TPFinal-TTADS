@@ -19,7 +19,21 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
   });
 
+
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+
+  it('should see que onda', () => {
+    //const fixturee = TestBed.createComponent(HomeComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('h1').textContent).toContain('TP FINAL TTADS');
+  });
+
+
+
 });
