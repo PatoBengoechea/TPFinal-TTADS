@@ -76,10 +76,6 @@ export class AddMovieComponent implements OnInit {
   }
 
   addMovie() {
-    console.log("Datos Formulario", this.addMovieForm.value);
-    console.log("Imagen Cargada", this.posterFile);
-
-    // Cargar pelicula
     this.newMovie.name = this.addMovieForm.controls.name.value;
     this.newMovie.genre = this.addMovieForm.controls.genre.value;
     this.newMovie.year = this.addMovieForm.controls.year.value;

@@ -98,15 +98,12 @@ router.get("/:partialTitle", (req, res, next) => {
 // Create movie
 router.post("/", async (req, res, next) => {
   const path = null;
-
-  if (req.body.img_path !== null)
-    path = "/assets/posterImages/" + req.body.img_path;
-
+  
   let mo = new movie({
     name: req.body.name,
     genre: req.body.genre,
     year: req.body.year,
-    img_path: path,
+    img_path: req.body.img_path,
     release_date: req.body.release_date,
     vote: req.body.vote
   });
@@ -122,7 +119,7 @@ router.post("/", async (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
+      console.log('error', err);
       return res.status(400).json({
         status: false,
         data: null,

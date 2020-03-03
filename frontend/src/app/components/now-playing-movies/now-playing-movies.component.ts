@@ -12,6 +12,22 @@ export class NowPlayingMoviesComponent implements OnInit {
   private dateToday: string;
   private errorMessage: string;
 
+  private monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+
+
   constructor(
     private service: ApiThemoviedbService,
     private spinner: NgxSpinnerService
@@ -20,8 +36,8 @@ export class NowPlayingMoviesComponent implements OnInit {
   ngOnInit() {
     let f = new Date();
     this.searchNowPlayingMovies();
-    this.dateToday =
-      f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    this.dateToday = this.monthNames[f.getMonth()] + " " + f.getDay() + ", " + f.getFullYear();
+
   }
 
   searchNowPlayingMovies(): void {
