@@ -14,7 +14,7 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { MovieComponent } from "../movie/movie.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-/* 
+/*
 class MockMovieService extends ApiThemoviedbService {
   data: any = [];
 }
@@ -45,7 +45,7 @@ describe("popularMoviesComponent", () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-  /* 
+  /*
   beforeEach(() => {
     service = new MockMovieService(http);
     spinner = new NgxSpinnerService();
@@ -61,7 +61,7 @@ describe("popularMoviesComponent", () => {
   it("should create", () => {
     expect(component).toBeTruthy();
   });
-  
+
   it("Should get the data", fakeAsync(() => {
     /* service.data = {
       movie1: "Here is some mock data",
@@ -72,5 +72,5 @@ describe("popularMoviesComponent", () => {
     fixture.detectChanges();
     expect(component.searchpopularMovies()).toHaveBeenCalled();
   }));
-  
+
 });
