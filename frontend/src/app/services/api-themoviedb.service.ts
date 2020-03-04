@@ -24,8 +24,7 @@ export class ApiThemoviedbService {
 
   // Buscar detalles de una película
   getMovieDetails(id: string) {
-    this.searchURL =
-      this.dominioURL + "/unique/" + id + "?";
+    this.searchURL = this.dominioURL + "/unique/" + id + "?";
     return this.http.get(this.searchURL);
   }
 
@@ -49,17 +48,17 @@ export class ApiThemoviedbService {
   // Load movie poster
   loadMovieImg(formData: FormData) {
     this.searchURL = this.dominioURL + "/load-movie";
-    return this.http.post(this.searchURL, formData, {
+    return this.http.put(this.searchURL, formData, {
       reportProgress: true,
       observe: "events"
     });
   }
 
   //Votar una película
-  rateMovie(id: number, vote: number) {
+  rateMovie(id: string, vote: number) {
     let body_rate: any = {};
-    body_rate.vote = vote
-    let url = this.searchURL = this.dominioURL + "/movie/vote/" + id
-    return this.http.post(url, body_rate)
+    body_rate.vote = vote;
+    this.searchURL = this.dominioURL + "/movie/vote/" + id + "?";
+    return this.http.put(this.searchURL, body_rate);
   }
 }

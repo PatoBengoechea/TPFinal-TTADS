@@ -98,7 +98,7 @@ router.get("/:partialTitle", (req, res, next) => {
 // Create movie
 router.post("/", async (req, res, next) => {
   const path = null;
-  
+
   let mo = new movie({
     name: req.body.name,
     genre: req.body.genre,
@@ -119,7 +119,7 @@ router.post("/", async (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log('error', err);
+      console.log("error", err);
       return res.status(400).json({
         status: false,
         data: null,
@@ -174,11 +174,21 @@ router.delete("/:id", async (req, res, next) => {
 });
 
 // Votar una película
-router.post("/movie/vote/:id", async (req, res, next) => {
+router.put("/movie/vote/:id", async (req, res, next) => {
   let id = req.params.id;
+  console.log(req.params.id);
+  console.log(req.body);
   if (req.body.vote) {
     await movie
       .updateOne({ _id: ObjectId(id) }, { $inc: { vote: req.body.vote } })
+      .then(movieUpdated => {
+        return res.status(200).json({
+          status: true,
+          data: null,
+          message: "Votacion aceptada",
+          movieUpdated
+        });
+      })
       .catch(err => {
         if (err)
           return res.status(404).json({
@@ -191,11 +201,12 @@ router.post("/movie/vote/:id", async (req, res, next) => {
   } else {
     movie
       .updateOne({ _id: ObjectId(id) }, { $inc: { vote: -1 } })
-      .then(result => {
+      .then(movieUpdated => {
         return res.status(200).json({
           status: true,
           data: null,
-          message: "Votacion aceptada"
+          message: "Votacion aceptada",
+          movieUpdated
         });
       })
       .catch(err => {

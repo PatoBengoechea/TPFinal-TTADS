@@ -85,32 +85,41 @@
               class="form-control-file"
               formControlName="poster"
               (change)="onFileChanged($event)"
+              required
             />
             <div class="progress">
-              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadPercent | async) + '%'" >
-              </div>
+              <div
+                class="progress-bar progress-bar-striped bg-success"
+                role="progressbar"
+                [style.width]="(uploadPercent | async) + '%'"
+              ></div>
             </div>
-            <input #imageFilm type="hidden" [value]="urlImage | async"> 
-            <small class="text-muted">No need to fill this.</small>
+            <small class="text-muted">Do not add movie until poster has been loaded!</small>
+            <input #imageFilm type="hidden" [value]="urlImage | async" />
+            <!-- Error message -->
+            <div *ngIf="poster.invalid && (poster.dirty || poster.touched)">
+              <small class="badge badge-danger">Poster is required.</small>
+            </div>
           </div>
         </div>
         <div class="form-group col-md-4 mx-auto">
-          <button *ngIf="urlImage | async; else btnDisabled"
+          <button
+            *ngIf="urlImage | async; else btnDisabled"
             type="submit"
             class="btn btn-info btn-block"
             [disabled]="!addMovieForm.valid"
           >
             Add Movie
           </button>
-          <ng-template #btnDisabled> 
+          <ng-template #btnDisabled>
             <button
-            type="submit"
-            disabled = true
-            class="btn btn-info btn-block btn-secondary"
-            [disabled]="!addMovieForm.valid"
-          >
-            Add Movie
-          </button>
+              type="submit"
+              disabled="true"
+              class="btn btn-info btn-block btn-secondary"
+              [disabled]="!addMovieForm.valid"
+            >
+              Add Movie
+            </button>
           </ng-template>
         </div>
       </form>

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 // Servicio
 import { ApiThemoviedbService } from "../../services/api-themoviedb.service";
 // Routing
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
 
 @Component({
@@ -31,7 +31,8 @@ export class MovieDetailsComponent implements OnInit {
   constructor(
     private service: ApiThemoviedbService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -57,8 +58,16 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   rateMovie(rate): void {
+    console.warn(this.movie._id);
     this.service.rateMovie(this.movie._id, rate).subscribe((data: any) => {
       console.log(data);
     });
+    this.reloadComponent();
+  }
+
+  reloadComponent(): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = "reload";
+    this.router.navigate(["movie-details", this.movie._id]);
   }
 }

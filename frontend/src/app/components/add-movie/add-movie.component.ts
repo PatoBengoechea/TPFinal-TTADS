@@ -3,11 +3,9 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ApiThemoviedbService } from "../../services/api-themoviedb.service";
 import { Router } from "@angular/router";
-import { HttpEventType } from "@angular/common/http";
-import { AngularFireStorage } from '@angular/fire/storage';
-import { finalize } from 'rxjs/operators';
-import { Observable } from 'rxjs/internal/Observable';
-import { viewClassName } from '@angular/compiler';
+import { AngularFireStorage } from "@angular/fire/storage";
+import { finalize } from "rxjs/operators";
+import { Observable } from "rxjs/internal/Observable";
 
 @Component({
   selector: "app-add-movie",
@@ -21,11 +19,10 @@ export class AddMovieComponent implements OnInit {
     year: null,
     release_date: null,
     img_path: null,
-    vote: null
+    vote: 0
   };
 
-
-  @ViewChild('imageFilm', { static: false}) inputImageFilm: ElementRef;
+  @ViewChild("imageFilm", { static: false }) inputImageFilm: ElementRef;
   private addMovieForm: FormGroup;
   private errorMessage: string;
   private validAdditionMsg: string;
@@ -50,6 +47,9 @@ export class AddMovieComponent implements OnInit {
   get year() {
     return this.addMovieForm.get("year");
   }
+  get poster(){
+    return this.addMovieForm.get("poster");
+  }
 
   ngOnInit(): void {
     this.addMovieForm = new FormGroup({
@@ -57,22 +57,26 @@ export class AddMovieComponent implements OnInit {
       genre: new FormControl(this.newMovie.genre, Validators.required),
       year: new FormControl(this.newMovie.year, Validators.required),
       releaseDate: new FormControl(this.newMovie.release_date),
-      poster: new FormControl(this.newMovie.img_path)
+      poster: new FormControl(this.newMovie.img_path, Validators.required)
     });
   }
 
   // Metodo que captura los datos de la imagen
   onFileChanged(event) {
-    const id = Math.random().toString(36).substring(2);
+    const id = Math.random()
+      .toString(36)
+      .substring(2);
     this.posterFile = <File>event.target.files[0];
-    const file = event.target.files[0]
-    const filePath = id
-    const ref = this.storage.ref(filePath)
-    const task = this.storage.upload(filePath, file)
+    const file = event.target.files[0];
+    const filePath = id;
+    const ref = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
 
     this.uploadPercent = task.percentageChanges();
-    task.snapshotChanges().pipe(finalize(() => this.urlImage = ref.getDownloadURL())).subscribe();
-
+    task
+      .snapshotChanges()
+      .pipe(finalize(() => (this.urlImage = ref.getDownloadURL())))
+      .subscribe();
   }
 
   addMovie() {
@@ -81,7 +85,8 @@ export class AddMovieComponent implements OnInit {
     this.newMovie.year = this.addMovieForm.controls.year.value;
     if (this.addMovieForm.controls.releaseDate.value !== "")
       this.newMovie.release_date = this.addMovieForm.controls.releaseDate.value;
-    if (this.posterFile !== null) this.newMovie.img_path = this.inputImageFilm.nativeElement.value
+    if (this.posterFile !== null)
+      this.newMovie.img_path = this.inputImageFilm.nativeElement.value;
 
     console.warn("Pelicula a cargar", this.newMovie);
 
@@ -103,18 +108,5 @@ export class AddMovieComponent implements OnInit {
         this.spinner.hide();
       }
     );
-
-    // Cargar Imagen
-    /* const fd = new FormData();
-    fd.append("poster", this.posterFile, this.posterFile.name);
-    // Enviar imagen al backend
-    this.movieService.loadMovieImg(fd).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress)
-        console.log(
-          "Upload Progress",
-          Math.round((event.loaded / event.total) * 100) + "%"
-        );
-      else if (event.type === HttpEventType.Response) console.log(event);
-    }); */
   }
 }
