@@ -51,9 +51,11 @@
           <div class="form-group col-md-6">
             <label for="inputMovieYear">Year</label>
             <input
-              type="text"
+              type = "number"
               class="form-control"
               formControlName="year"
+              min="1900"
+              max="2100"
               placeholder="Year when it was released"
               required
             />
