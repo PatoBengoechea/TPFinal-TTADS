@@ -73,7 +73,7 @@ export class MovieDetailsComponent implements OnInit {
       (data: any) => {
         console.log(data);
         this.spinner.hide();
-        this.toastr.success("Thank for vote!", "Vote Sent");
+        this.toastr.success("Thank for vote!", data.message);
       },
       err => {
         if (err.status === 0) {

@@ -28,8 +28,8 @@ export class AddMovieComponent implements OnInit {
 
   @ViewChild("imageFilm", { static: false }) inputImageFilm: ElementRef;
   private addMovieForm: FormGroup;
-  private errorMessage: string;
-  private validAdditionMsg: string;
+  // private errorMessage: string;
+  // private validAdditionMsg: string;
   private posterFile: File = null;
 
   uploadPercent: Observable<number>;
@@ -106,19 +106,23 @@ export class AddMovieComponent implements OnInit {
         // this.validAdditionMsg = res.data.result;
         this.router.navigate(["/addmovie"]);
         this.spinner.hide();
-        this.toastr.success("", "Movie added succesfully!");
+        this.addMovieForm.reset();
+        this.toastr.success("", res.data.result);
       },
       err => {
         console.log(err);
         if (err.status === 0) {
           // this.errorMessage = "Unable to connect with server";
-          this.toastr.danger("Please Try Later", "Unable to connect with server");
+          this.toastr.danger(
+            "Please Try Later",
+            "Unable to connect with server"
+          );
         } else {
           // this.errorMessage = err.error.message;
           console.log(err.message);
-          this.toastr.danger("Error message from backend", "Error");
+          this.toastr.danger("Please Try Later ", "Error handeling your request");
         }
-        this.spinner.hide();        
+        this.spinner.hide();
       }
     );
   }

@@ -173,7 +173,9 @@ router.delete("/:id", async (req, res, next) => {
 // Votar una película
 router.put("/movie/vote/:id", async (req, res, next) => {
   let id = req.params.id;
+
   console.log("Votar pelicula", req.body);
+
   if (req.body.vote) {
     await movie
       .updateOne({ _id: ObjectId(id) }, { $inc: { vote: req.body.vote } })
@@ -194,27 +196,7 @@ router.put("/movie/vote/:id", async (req, res, next) => {
               "Error al votar una pelicula. No se ha encontrado la pelicula"
           });
       });
-  } else {
-    movie
-      .updateOne({ _id: ObjectId(id) }, { $inc: { vote: -1 } })
-      .then(movieUpdated => {
-        return res.status(200).json({
-          status: true,
-          data: null,
-          message: "Votacion aceptada",
-          movieUpdated
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        return res.status(400).json({
-          status: false,
-          data: null,
-          message: "Error al votar la pelicula"
-        });
-      });
   }
-
   next();
 });
 
