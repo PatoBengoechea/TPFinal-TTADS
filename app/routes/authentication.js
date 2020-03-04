@@ -35,7 +35,7 @@ router.post("/signup", async (req, res) => {
     console.log(colors.yellow("Token created"));
 
     // Configure response to client
-    res.json({
+    res.status(200).json({
       auth: true,
       message: "User created succesfully",
       token
@@ -72,9 +72,9 @@ router.post("/signin", async (req, res) => {
         message: "Wrong password"
       });
 
-    // se setea 'id: user._id' pq proviene desde mongodb y si no lo asignamos como objeto no se lee comi json
+    // se setea 'id: user._id' pq proviene desde mongodb y si no lo asignamos como objeto no se lee como json
     const token = jwt.sign({ id: user._id }, config.secret, {
-      expiresIn: 60 * 60 * 24
+      expiresIn: 60 * 60 * 24 // 1 dia de vida
     });
 
     return res.json({
@@ -100,7 +100,11 @@ router.post("/signin", async (req, res) => {
 router.get("/protected", verifyToken, async (req, res) => {
   try {
     // Search for user in DB
-    const user = await User.findById(req.userId, { password: 0, createdAt: 0, updatedAt: 0 });
+    const user = await User.findById(req.userId, {
+      password: 0,
+      createdAt: 0,
+      updatedAt: 0
+    });
     // Validate user
     if (!user)
       return res.status(404).json({

@@ -5,7 +5,6 @@ const colors = require("colors");
 const path = require("path");
 
 var movie = require("../models/movie");
-const verifyToken = require("../utilities/validateToken");
 
 var ObjectId = mongoose.Types.ObjectId;
 

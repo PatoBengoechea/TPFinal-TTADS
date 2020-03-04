@@ -5,7 +5,7 @@ import { ApiThemoviedbService } from "../../services/api-themoviedb.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
 import { NgxSpinnerService } from "ngx-spinner";
-import { ToastService } from '../../toast-service.service'
+import { ToastService } from "../../toast-service.service";
 
 @Component({
   selector: "app-movie-details",
@@ -64,21 +64,39 @@ export class MovieDetailsComponent implements OnInit {
     this.location.back();
   }
 
-  rateMovie(rate): void {this.spinner.show();
-    this.service.rateMovie(this.movie._id, rate).subscribe((data: any) => {
-    this.spinner.hide()
-    this.toastr.success("Thank for vote!", "Vote Sent")
-    });
-    // this.router.navigate(["movie-details", this.movie._id]);
+  rateMovie(rate): void {
+    this.spinner.show();
+    this.service.rateMovie(this.movie._id, rate).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.toastr.success("Thank for vote!", "Vote Sent");
+      },
+      err => {
+        if (err.status === 0) {
+          // this.errorMessage = "Unable to connect with server";
+          this.toastr.danger(
+            "Please Try Later",
+            "Unable to connect with server"
+          );
+        } else {
+          // this.errorMessage = err.error.message;
+          this.toastr.danger(
+            "Please Try Later",
+            "There was a problem handeling your request"
+          );
+        }
+      }
+    );
+    this.spinner.hide();
     this.reloadComponent();
   }
 
   reloadComponent(): void {
-    this.spinner.show()
+    this.spinner.show();
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = "reload";
     this.router.navigate(["movie-details", this.movie._id]);
     this.ngOnInit();
-    this.spinner.hide()
+    this.spinner.hide();
   }
 }

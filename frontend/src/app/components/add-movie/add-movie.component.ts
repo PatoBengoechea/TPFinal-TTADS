@@ -9,7 +9,7 @@ import { finalize } from "rxjs/operators";
 import { Observable } from "rxjs/internal/Observable";
 import { viewClassName } from "@angular/compiler";
 import { DpDatePickerModule } from "ng2-date-picker";
-import { ToastService } from '../../toast-service.service';
+import { ToastService } from "../../toast-service.service";
 
 @Component({
   selector: "app-add-movie",
@@ -55,7 +55,7 @@ export class AddMovieComponent implements OnInit {
   get poster() {
     return this.addMovieForm.get("poster");
   }
-  get releaseDate(){
+  get releaseDate() {
     return this.addMovieForm.get("releaseDate");
   }
 
@@ -106,15 +106,18 @@ export class AddMovieComponent implements OnInit {
         // this.validAdditionMsg = res.data.result;
         this.router.navigate(["/addmovie"]);
         this.spinner.hide();
-        this.toastr.success("", "Movie added")
+        this.toastr.success("", "Movie added");
       },
       err => {
         console.log(err);
         if (err.status === 0) {
           // this.errorMessage = "Unable to connect with server";
-        } else this.errorMessage = err.error.message;
-        this.spinner.hide();
-        this.toastr.danger("Please Try Later", "There was a problem")
+          this.toastr.danger("Please Try Later", "Unable to connect with server");
+        } else {
+          // this.errorMessage = err.error.message;
+          this.toastr.danger("Please Try Later", "There was a problem handeling your request");
+        }
+        this.spinner.hide();        
       }
     );
   }
