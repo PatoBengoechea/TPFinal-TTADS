@@ -4,6 +4,9 @@ import { ApiThemoviedbService } from "../../services/api-themoviedb.service";
 // Routing
 import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
+import { NgxSpinnerService } from "ngx-spinner";
+import { ToastService } from '../../toast-service.service'
+import { Ng2IzitoastService } from 'ng2-izitoast';
 
 @Component({
   selector: "app-movie-details",
@@ -33,7 +36,10 @@ export class MovieDetailsComponent implements OnInit {
     private service: ApiThemoviedbService,
     private route: ActivatedRoute,
     private location: Location,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService,
+    public toastr: ToastService,
+    public iziToast: Ng2IzitoastService
   ) {}
 
   ngOnInit() {
@@ -60,9 +66,10 @@ export class MovieDetailsComponent implements OnInit {
     this.location.back();
   }
 
-  rateMovie(rate): void {
+  rateMovie(rate): void {this.spinner.show();
     this.service.rateMovie(this.movie._id, rate).subscribe((data: any) => {
-      console.log(data);
+    this.spinner.hide()
+    this.toastr.success("Thank for vote!")
     });
     // this.router.navigate(["movie-details", this.movie._id]);
     this.reloadComponent();
