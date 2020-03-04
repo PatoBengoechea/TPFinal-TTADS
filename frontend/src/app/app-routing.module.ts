@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 // Componentes a direccionar
-import { HomeComponent } from "./components/home/home.component";
 import { BuscarpeliculasComponent } from "./components/buscarpeliculas/buscarpeliculas.component";
 import { NowPlayingMoviesComponent } from "./components/now-playing-movies/now-playing-movies.component";
 import { PopularMoviesComponent } from "./components/popular-movies/popular-movies.component";

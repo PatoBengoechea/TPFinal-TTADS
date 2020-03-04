@@ -27,6 +27,7 @@ export class MovieDetailsComponent implements OnInit {
     "December"
   ];
   private vote = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  private actors: any = {};
 
   constructor(
     private service: ApiThemoviedbService,
@@ -50,6 +51,8 @@ export class MovieDetailsComponent implements OnInit {
         date.getDay() +
         ", " +
         date.getFullYear();
+
+      if (this.movie.actors !== undefined) this.actors = this.movie.actors;
     });
   }
 
@@ -58,10 +61,10 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   rateMovie(rate): void {
-    console.warn(this.movie._id);
     this.service.rateMovie(this.movie._id, rate).subscribe((data: any) => {
       console.log(data);
     });
+    // this.router.navigate(["movie-details", this.movie._id]);
     this.reloadComponent();
   }
 
@@ -69,5 +72,6 @@ export class MovieDetailsComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = "reload";
     this.router.navigate(["movie-details", this.movie._id]);
+    this.ngOnInit();
   }
 }

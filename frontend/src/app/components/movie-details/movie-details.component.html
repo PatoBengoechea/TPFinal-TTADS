@@ -34,7 +34,7 @@
             {{ vote[i] }}
           </button>
         </div>
-        <hr>
+        <hr />
         <button class="btn btn-info" (click)="goBack()">
           Go Back
         </button>
@@ -43,7 +43,7 @@
   </div>
 </div>
 <!-- Actors -->
-<div class="container">
+<div *ngIf="this.actors.length" class="container">
   <h5 class="card-header">
     Actors
   </h5>

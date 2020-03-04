@@ -22,7 +22,6 @@ import { AppRoutingModule } from ".//app-routing.module";
 import { AppComponent } from "./app.component";
 import { BuscarpeliculasComponent } from "./components/buscarpeliculas/buscarpeliculas.component";
 import { NowPlayingMoviesComponent } from "./components/now-playing-movies/now-playing-movies.component";
-import { HomeComponent } from "./components/home/home.component";
 import { PopularMoviesComponent } from "./components/popular-movies/popular-movies.component";
 import { MovieComponent } from "./components/movie/movie.component";
 import { MovieDetailsComponent } from "./components/movie-details/movie-details.component";
@@ -38,7 +37,6 @@ import { DpDatePickerModule } from 'ng2-date-picker';
     AppComponent,
     BuscarpeliculasComponent,
     NowPlayingMoviesComponent,
-    HomeComponent,
     PopularMoviesComponent,
     MovieComponent,
     MovieDetailsComponent,

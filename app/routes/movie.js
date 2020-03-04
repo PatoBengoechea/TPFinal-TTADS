@@ -176,8 +176,7 @@ router.delete("/:id", async (req, res, next) => {
 // Votar una película
 router.put("/movie/vote/:id", async (req, res, next) => {
   let id = req.params.id;
-  console.log(req.params.id);
-  console.log(req.body);
+  console.log("Votar pelicula", req.body);
   if (req.body.vote) {
     await movie
       .updateOne({ _id: ObjectId(id) }, { $inc: { vote: req.body.vote } })
