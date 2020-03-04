@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./actor.component.css"]
 })
 export class ActorComponent implements OnInit {
-  @Input() actor;
+  @Input() actor: any;
 
   constructor() {}
 

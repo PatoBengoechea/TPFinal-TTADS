@@ -1,11 +1,17 @@
-<div class="card" style="width: 18rem;">
+<div class="card mt-2 mb-2">
+  <div class="card-header">
+    <h5 class="card-title text-center">
+      {{ actor.name }}
+    </h5>
+  </div>
   <img
     class="card-img-top image"
     src="{{ actor.img_path }}"
-    alt="Card image cap"
+    alt="Imagen del actor {{ actor.name }}"
   />
-  <div class="card-body">
-    <h5 class="card-title">{{ actor.name }}</h5>
-    <p class="card-text">{{ actor.nationality }}</p>
+  <div class="card-footer text-center">
+    <small class="text-muted">
+      <strong>Nationality:</strong> {{ actor.nationality }}
+    </small>
   </div>
 </div>

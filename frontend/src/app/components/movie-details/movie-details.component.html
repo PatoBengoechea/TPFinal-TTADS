@@ -4,14 +4,14 @@
     <div class="row">
       <div class="col-4">
         <img
-          class="img-fluid img-thumbnail"
+          class="img-thumbnail image"
           src="{{ movie.img_path }}"
           alt="Poster de la película {{ movie.name }}"
         />
       </div>
       <div class="col-8">
         <h1 class="display-4">{{ movie.name }}</h1>
-        <p class="lead">
+        <p class="card-text">
           <strong>Release Date: </strong>{{ movie.parsedDate }}
         </p>
         <p class="card-text"><strong>Vote Count: </strong>{{ movie.vote }}</p>
@@ -44,10 +44,10 @@
 </div>
 <!-- Actors -->
 <div *ngIf="this.actors.length" class="container">
-  <h5 class="card-header">
+  <h5 class="card-header text-center">
     Actors
   </h5>
-  <div class="container card-group mx-auto">
+  <div class="card-deck ">
     <app-actor
       *ngFor="let actor of movie.actors"
       class="col-4 actor"

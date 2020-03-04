@@ -1,8 +1,7 @@
 <div *ngIf="movie">
   <div class="card shadow p-3 mb-3 rounded" (click)="goToDetails(movie)">
     <img
-      class="card-img"
-      style="height: 25%"
+      class="card-img-top image"      
       href="image"
       src="{{ movie.img_path }}"
       alt="Poster de la película {{ movie.name }}"
@@ -13,6 +12,11 @@
       <p class="card-text"><strong>Genero: </strong> {{ movie.genre }}</p>
       <p class="card-text"><strong>Popularity: </strong> <em> {{ movie.vote }}  </em></p>
       <p class="card-text"><strong>Release date: </strong> {{ movie.parsedDate }}</p>
+    </div>
+    <div class="card-footer text-center">
+      <small class="text-muted">
+        Click on card to watch more details!
+      </small>
     </div>
   </div>
 </div>

@@ -2,3 +2,7 @@
     background-color: lightgray;
     transition: background-color 1s;
 }
+
+.image {
+    height: 400px;
+}

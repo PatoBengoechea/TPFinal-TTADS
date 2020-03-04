@@ -4,3 +4,8 @@
 .actor:hover {
     transform: scale(1.1);
 }
+
+.image {
+    height: 400px;
+    width: 300px;
+}
