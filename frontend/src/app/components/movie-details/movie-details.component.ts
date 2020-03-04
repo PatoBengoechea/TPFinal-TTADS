@@ -46,6 +46,7 @@ export class MovieDetailsComponent implements OnInit {
 
   getMovieDetails(): void {
     var id = this.route.snapshot.paramMap.get("query");
+    this.spinner.show()
     this.service.getMovieDetails(id).subscribe((data: any) => {
       this.movie = data.data.movies[0];
       let date = new Date(this.movie.release_date);
@@ -57,6 +58,8 @@ export class MovieDetailsComponent implements OnInit {
         date.getFullYear();
 
       if (this.movie.actors !== undefined) this.actors = this.movie.actors;
+
+      this.spinner.hide();
     });
   }
 
@@ -69,17 +72,18 @@ export class MovieDetailsComponent implements OnInit {
     this.service.rateMovie(this.movie._id, rate).subscribe(
       (data: any) => {
         console.log(data);
+        this.spinner.hide();
         this.toastr.success("Thank for vote!", "Vote Sent");
       },
       err => {
         if (err.status === 0) {
-          // this.errorMessage = "Unable to connect with server";
+          this.spinner.hide();
           this.toastr.danger(
             "Please Try Later",
             "Unable to connect with server"
           );
         } else {
-          // this.errorMessage = err.error.message;
+          this.spinner.hide();
           this.toastr.danger(
             "Please Try Later",
             "There was a problem handeling your request"
@@ -87,16 +91,13 @@ export class MovieDetailsComponent implements OnInit {
         }
       }
     );
-    this.spinner.hide();
     this.reloadComponent();
   }
 
   reloadComponent(): void {
-    this.spinner.show();
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = "reload";
     this.router.navigate(["movie-details", this.movie._id]);
     this.ngOnInit();
-    this.spinner.hide();
   }
 }
