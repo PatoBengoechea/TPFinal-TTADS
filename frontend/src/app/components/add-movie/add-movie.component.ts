@@ -3,9 +3,12 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ApiThemoviedbService } from "../../services/api-themoviedb.service";
 import { Router } from "@angular/router";
-import { AngularFireStorage } from "@angular/fire/storage";
-import { finalize } from "rxjs/operators";
-import { Observable } from "rxjs/internal/Observable";
+import { HttpEventType } from "@angular/common/http";
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable';
+import { viewClassName } from '@angular/compiler';
+import {DpDatePickerModule} from 'ng2-date-picker';
 
 @Component({
   selector: "app-add-movie",

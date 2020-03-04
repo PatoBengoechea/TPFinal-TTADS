@@ -74,6 +74,10 @@
               formControlName="releaseDate"
               placeholder="Ex: 2020-02-01"
             />
+
+
+           <dp-date-picker #releaseDate [theme]="'dp-material'" [(ngModel)]="selectedDate" [config]="datePickerConfig"></dp-date-picker>  
+
             <small class="text-muted">No need to fill this.</small>
           </div>
         </div>
