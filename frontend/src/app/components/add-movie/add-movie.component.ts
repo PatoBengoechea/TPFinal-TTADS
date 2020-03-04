@@ -106,7 +106,7 @@ export class AddMovieComponent implements OnInit {
         // this.validAdditionMsg = res.data.result;
         this.router.navigate(["/addmovie"]);
         this.spinner.hide();
-        this.toastr.success("", "Movie added");
+        this.toastr.success("", "Movie added succesfully!");
       },
       err => {
         console.log(err);
@@ -115,7 +115,8 @@ export class AddMovieComponent implements OnInit {
           this.toastr.danger("Please Try Later", "Unable to connect with server");
         } else {
           // this.errorMessage = err.error.message;
-          this.toastr.danger("Please Try Later", "There was a problem handeling your request");
+          console.log(err.message);
+          this.toastr.danger("Error message from backend", "Error");
         }
         this.spinner.hide();        
       }

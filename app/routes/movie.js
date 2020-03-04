@@ -96,8 +96,6 @@ router.get("/:partialTitle", (req, res, next) => {
 
 // Create movie
 router.post("/", async (req, res, next) => {
-  const path = null;
-
   let mo = new movie({
     name: req.body.name,
     genre: req.body.genre,
@@ -111,7 +109,7 @@ router.post("/", async (req, res, next) => {
     .save()
     .then(doc => {
       console.log(colors.blue(doc));
-      return res.json({
+      return res.status(200).json({
         status: true,
         data: { result: "Pelicula guardada" },
         message: null

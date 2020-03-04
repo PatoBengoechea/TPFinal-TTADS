@@ -27,7 +27,6 @@ export class NowPlayingMoviesComponent implements OnInit {
     "December"
   ];
 
-
   constructor(
     private service: ApiThemoviedbService,
     private spinner: NgxSpinnerService
@@ -36,8 +35,8 @@ export class NowPlayingMoviesComponent implements OnInit {
   ngOnInit() {
     let f = new Date();
     this.searchNowPlayingMovies();
-    this.dateToday = this.monthNames[f.getMonth()] + " " + f.getDay() + ", " + f.getFullYear();
-
+    this.dateToday =
+      this.monthNames[f.getMonth()] + " " + f.getDay() + ", " + f.getFullYear();
   }
 
   searchNowPlayingMovies(): void {

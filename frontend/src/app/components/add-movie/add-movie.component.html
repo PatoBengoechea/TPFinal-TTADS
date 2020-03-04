@@ -96,9 +96,9 @@
                 [style.width]="(uploadPercent | async) + '%'"
               ></div>
             </div>
-            <small class="text-muted"
-              >Do not add movie until poster has been loaded!</small
-            >
+            <small class="text-muted">
+              Do not add movie until poster has been loaded!
+            </small>
             <input #imageFilm type="hidden" [value]="urlImage | async" />
             <!-- Error message -->
             <div *ngIf="poster.invalid && (poster.dirty || poster.touched)">
@@ -113,8 +113,8 @@
             class="btn btn-info btn-block"
           >
             Add Movie
-          </button>
-          <ng-template #btnDisabled>
+          </button> 
+          <!-- <ng-template #btnDisabled>
             <button
               type="submit"
               disabled="true"
@@ -122,7 +122,7 @@
             >
               Complete the form
             </button>
-          </ng-template>
+          </ng-template> -->
         </div>
       </form>
     </div>
