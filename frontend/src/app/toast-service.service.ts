@@ -7,7 +7,7 @@ import { Ng2IzitoastService } from 'ng2-izitoast';
 })
 export class ToastService {
   constructor(
-    private iziToast: Ng2IzitoastService,
+    public iziToast: Ng2IzitoastService
   ) { }
   success(msg = '', title = '¡Datos guardados correctamente!') {
     this.iziToast.success({

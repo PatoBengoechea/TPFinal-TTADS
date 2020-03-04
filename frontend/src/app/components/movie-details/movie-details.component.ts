@@ -6,7 +6,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastService } from '../../toast-service.service'
-import { Ng2IzitoastService } from 'ng2-izitoast';
 
 @Component({
   selector: "app-movie-details",
@@ -38,8 +37,7 @@ export class MovieDetailsComponent implements OnInit {
     private location: Location,
     private router: Router,
     private spinner: NgxSpinnerService,
-    public toastr: ToastService,
-    public iziToast: Ng2IzitoastService
+    public toastr: ToastService
   ) {}
 
   ngOnInit() {
@@ -69,16 +67,18 @@ export class MovieDetailsComponent implements OnInit {
   rateMovie(rate): void {this.spinner.show();
     this.service.rateMovie(this.movie._id, rate).subscribe((data: any) => {
     this.spinner.hide()
-    this.toastr.success("Thank for vote!")
+    this.toastr.success("Thank for vote!", "Vote Sent")
     });
     // this.router.navigate(["movie-details", this.movie._id]);
     this.reloadComponent();
   }
 
   reloadComponent(): void {
+    this.spinner.show()
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = "reload";
     this.router.navigate(["movie-details", this.movie._id]);
     this.ngOnInit();
+    this.spinner.hide()
   }
 }

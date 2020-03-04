@@ -9,6 +9,7 @@ import { finalize } from "rxjs/operators";
 import { Observable } from "rxjs/internal/Observable";
 import { viewClassName } from "@angular/compiler";
 import { DpDatePickerModule } from "ng2-date-picker";
+import { ToastService } from '../../toast-service.service';
 
 @Component({
   selector: "app-add-movie",
@@ -38,7 +39,8 @@ export class AddMovieComponent implements OnInit {
     private movieService: ApiThemoviedbService,
     private router: Router,
     private spinner: NgxSpinnerService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    public toastr: ToastService
   ) {}
 
   get name() {
@@ -101,17 +103,18 @@ export class AddMovieComponent implements OnInit {
     this.spinner.show();
     this.movieService.createMovie(this.newMovie).subscribe(
       res => {
-        console.log(res);
-        this.validAdditionMsg = res.data.result;
+        // this.validAdditionMsg = res.data.result;
         this.router.navigate(["/addmovie"]);
         this.spinner.hide();
+        this.toastr.success("", "Movie added")
       },
       err => {
         console.log(err);
         if (err.status === 0) {
-          this.errorMessage = "Unable to connect with server";
+          // this.errorMessage = "Unable to connect with server";
         } else this.errorMessage = err.error.message;
         this.spinner.hide();
+        this.toastr.danger("Please Try Later", "There was a problem")
       }
     );
   }
