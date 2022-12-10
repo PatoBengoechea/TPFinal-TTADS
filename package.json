@@ -23,7 +23,7 @@
     "body-parser": "^1.18.3",
     "colors": "^1.4.0",
     "cors": "^2.8.4",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-fileupload": "^1.1.6",
     "firebase": "^7.9.3",
     "jsonwebtoken": "^8.5.1",
